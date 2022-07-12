@@ -1,7 +1,7 @@
-const video4 = document.getElementsByClassName('input_video4')[0];
-const out4 = document.getElementsByClassName('output4')[0];
-const controlsElement4 = document.getElementsByClassName('control4')[0];
-const canvasCtx4 = out4.getContext('2d');
+const inputVideo = document.getElementsByClassName('input_video')[0];
+const outputVideo = document.getElementsByClassName('output')[0];
+const controlsElement = document.getElementsByClassName('control')[0];
+const canvasCtx = outputVideo.getContext('2d');
 
 const fpsControl = new FPS();
 const spinner = document.querySelector('.loading');
@@ -46,38 +46,38 @@ function onResultsHolistic(results) {
   removeLandmarks(results);
   fpsControl.tick();
 
-  canvasCtx4.save();
-  canvasCtx4.clearRect(0, 0, out4.width, out4.height);
-  canvasCtx4.drawImage(
-      results.image, 0, 0, out4.width, out4.height);
-  canvasCtx4.lineWidth = 5;
+  canvasCtx.save();
+  canvasCtx.clearRect(0, 0, outputVideo.width, outputVideo.height);
+  canvasCtx.drawImage(
+      results.image, 0, 0, outputVideo.width, outputVideo.height);
+  canvasCtx.lineWidth = 5;
   if (results.poseLandmarks) {
     if (results.rightHandLandmarks) {
-      canvasCtx4.strokeStyle = '#00FF00';
-      connect(canvasCtx4, [[
+      canvasCtx.strokeStyle = '#00FF00';
+      connect(canvasCtx, [[
                 results.poseLandmarks[POSE_LANDMARKS.RIGHT_ELBOW],
                 results.rightHandLandmarks[0]
               ]]);
     }
       if (results.leftHandLandmarks) {
-        canvasCtx4.strokeStyle = '#FF0000';
-        connect(canvasCtx4, [[
+        canvasCtx.strokeStyle = '#FF0000';
+        connect(canvasCtx, [[
                   results.poseLandmarks[POSE_LANDMARKS.LEFT_ELBOW],
                   results.leftHandLandmarks[0]
                 ]]);
     }
   }
   drawConnectors(
-      canvasCtx4, results.poseLandmarks, POSE_CONNECTIONS,
+      canvasCtx, results.poseLandmarks, POSE_CONNECTIONS,
       {color: '#00FF00'});
   drawLandmarks(
-      canvasCtx4, results.poseLandmarks,
+      canvasCtx, results.poseLandmarks,
       {color: '#00FF00', fillColor: '#FF0000'});
   drawConnectors(
-      canvasCtx4, results.rightHandLandmarks, HAND_CONNECTIONS,
+      canvasCtx, results.rightHandLandmarks, HAND_CONNECTIONS,
       {color: '#00CC00'});
   drawLandmarks(
-      canvasCtx4, results.rightHandLandmarks, {
+      canvasCtx, results.rightHandLandmarks, {
         color: '#00FF00',
         fillColor: '#FF0000',
         lineWidth: 2,
@@ -86,10 +86,10 @@ function onResultsHolistic(results) {
         }
       });
   drawConnectors(
-      canvasCtx4, results.leftHandLandmarks, HAND_CONNECTIONS,
+      canvasCtx, results.leftHandLandmarks, HAND_CONNECTIONS,
       {color: '#CC0000'});
   drawLandmarks(
-      canvasCtx4, results.leftHandLandmarks, {
+      canvasCtx, results.leftHandLandmarks, {
         color: '#FF0000',
         fillColor: '#00FF00',
         lineWidth: 2,
@@ -98,28 +98,28 @@ function onResultsHolistic(results) {
         }
       });
   drawConnectors(
-      canvasCtx4, results.faceLandmarks, FACEMESH_TESSELATION,
+      canvasCtx, results.faceLandmarks, FACEMESH_TESSELATION,
       {color: '#C0C0C070', lineWidth: 1});
   drawConnectors(
-      canvasCtx4, results.faceLandmarks, FACEMESH_RIGHT_EYE,
+      canvasCtx, results.faceLandmarks, FACEMESH_RIGHT_EYE,
       {color: '#FF3030'});
   drawConnectors(
-      canvasCtx4, results.faceLandmarks, FACEMESH_RIGHT_EYEBROW,
+      canvasCtx, results.faceLandmarks, FACEMESH_RIGHT_EYEBROW,
       {color: '#FF3030'});
   drawConnectors(
-      canvasCtx4, results.faceLandmarks, FACEMESH_LEFT_EYE,
+      canvasCtx, results.faceLandmarks, FACEMESH_LEFT_EYE,
       {color: '#30FF30'});
   drawConnectors(
-      canvasCtx4, results.faceLandmarks, FACEMESH_LEFT_EYEBROW,
+      canvasCtx, results.faceLandmarks, FACEMESH_LEFT_EYEBROW,
       {color: '#30FF30'});
   drawConnectors(
-      canvasCtx4, results.faceLandmarks, FACEMESH_FACE_OVAL,
+      canvasCtx, results.faceLandmarks, FACEMESH_FACE_OVAL,
       {color: '#E0E0E0'});
   drawConnectors(
-      canvasCtx4, results.faceLandmarks, FACEMESH_LIPS,
+      canvasCtx, results.faceLandmarks, FACEMESH_LIPS,
       {color: '#E0E0E0'});
 
-  canvasCtx4.restore();
+  canvasCtx.restore();
 }
 
 const holistic = new Holistic({locateFile: (file) => {
@@ -127,16 +127,16 @@ const holistic = new Holistic({locateFile: (file) => {
 }});
 holistic.onResults(onResultsHolistic);
 
-const camera = new Camera(video4, {
+const camera = new Camera(inputVideo, {
   onFrame: async () => {
-    await holistic.send({image: video4});
+    await holistic.send({image: inputVideo});
   },
   width: 480,
   height: 480
 });
 camera.start();
 
-new ControlPanel(controlsElement4, {
+new ControlPanel(controlsElement, {
       selfieMode: true,
       upperBodyOnly: true,
       smoothLandmarks: true,
@@ -164,6 +164,6 @@ new ControlPanel(controlsElement4, {
       }),
     ])
     .on(options => {
-      video4.classList.toggle('selfie', options.selfieMode);
+      inputVideo.classList.toggle('selfie', options.selfieMode);
       holistic.setOptions(options);
     });
