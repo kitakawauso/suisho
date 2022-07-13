@@ -2,65 +2,24 @@
 <html>
 <head>
   <meta charset="utf-8">
-  
-  <style src="./style.css"></style>
-
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.1/camera_utils.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.2/drawing_utils.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic@0.1/holistic.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
   <div class="container">
-
-    <div class="columns">
-
-      <!-- WEBCAM INPUT -->
-      <div class="column">
-        <article class="panel is-info">
-          <p class="panel-heading">
-            Webcam Input
-          </p>
-          <div class="panel-block">
-            <video class="input-video"></video>
-          </div>
-        </article>
-      </div>
-
-      <!-- MEDIAPIPE OUTPUT -->
-      <div class="column">
-        <article class="panel is-info">
-          <p class="panel-heading">
-            Mediapipe Output
-          </p>
-          <div class="panel-block">
-            <canvas class="output-video" width="480px" height="480px"></canvas>
-          </div>
-        </article>
-      </div>
-
-      <!-- CONSOLE LOG -->
-      <div class="column">
-        <article class="panel is-info">
-          <p class="panel-heading">
-            Console log
-          </p>
-          <div class="panel-block">
-            <div class="console-canvass"></div>
-          </div>
-        </article>
-      </div>
-
+    <div class="contain">
+      <video class="input_video canvas" width="1280px" height="720px"></video>
+      <canvas class="output_video canvas" width="1280px" height="720px"></canvas>
     </div>
     
-    <div class="loading">
-      <div class="spinner"></div>
+    <div class="contain">
+      <audio src="yomi.mp3" class="chant" onplay="chanting();" controls></audio>
     </div>
-
-  <div style="visibility: hidden" class="control">
   </div>
 
-  <script type="text/javascript" src="./script.js"></script>
+  <script src="./holistic.js"></script>
 </body>
 </html>
