@@ -1,7 +1,7 @@
 const inputVideo = document.getElementsByClassName("input-video")[0];
 const outputCanvas = document.getElementsByClassName("output-canvas")[0];
-const chant = document.getElementsByClassName("chant")[0];
 const canvasCtx = outputCanvas.getContext("2d");
+const chant = document.getElementsByClassName("chant")[0];
 
 inputVideo.style.display = "none";
 

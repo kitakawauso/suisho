@@ -7,22 +7,23 @@
 .container {
   margin: 1%;
   display: grid;
-    grid-template-rows: 60vh 25vh;
+    grid-template-rows: 70vh 25vh;
     grid-template-columns: 50vw 1fr;
     /* TODO: Responsive support */
     grid-template-areas:
-      "video    canvas"
+      "video    video"
       "console  control";
 }
+
+.container > div {
+  padding: 1%;
+}
+
 
 #video-box {
   grid-area: video;
   background-color: #333;
-}
-
-#canvas-box {
-  grid-area: canvas;
-  background-color: #ff2;
+  text-align: center;
 }
 
 #console-box {
@@ -33,8 +34,9 @@
 #control-box {
   grid-area: control;
   background-color: #1a5;
+  text-align: center;
 }
 
 .output-canvas {
-  width: 100%;
+  height: 100%;
 }
