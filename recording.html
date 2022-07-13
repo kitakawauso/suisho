@@ -24,23 +24,21 @@
       src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js"
       crossorigin="anonymous"
     ></script>
-
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   </head>
 
   <body>
     <div class="container">
-      <div id="video-box">
+      <div id="videoBox">
         <video class="input-video canvas" width="1280px" height="720px"></video>
         <canvas class="output-canvas" width="1280px" height="720px"></canvas>
       </div>
 
-      <div id="console-box">
+      <div id="consoleBox" style="display: block">
         <h1>Console</h1>
         <p id="console"></p>
       </div>
 
-      <div id="control-box">
+      <div id="controlBox">
         <div id="field-view"></div>
         <audio
           src="yomi.mp3"
@@ -51,6 +49,12 @@
       </div>
     </div>
 
-    <script src="./js/recording.js"></script>
+    <script>
+      if (document.getElementById("consoleBox").style.display == "block") {
+        document.getElementById("consoleBox").style.display = "none";
+      } else {
+        console.log("else");
+      }
+    </script>
   </body>
 </html>

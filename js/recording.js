@@ -1,3 +1,56 @@
+const formDiv = document.getElementById("form");
+const recordDiv = document.getElementById("record");
+
+const outputData = {
+  player: {
+    name: "unknown",
+    age: 0,
+    grade: 0,
+    tall: 0,
+    gender: 0,
+    hand: 0,
+    style: 0,
+    body: 0,
+  },
+  swipe: {
+    position: 0,
+    point: [],
+  },
+};
+
+// form input begin
+let nameInput = document.getElementById("nameForm");
+let ageInput = document.getElementById("ageForm");
+let gradeInput = document.getElementById("gradeForm");
+let tallInput = document.getElementById("tallForm");
+let genderInput;
+function genderChecked(value) {
+  genderInput = value;
+}
+let handInput;
+function handChecked(value) {
+  handInput = value;
+}
+let styleInput = document.getElementById("styleForm");
+let bodyInput = document.getElementById("bodyForm");
+
+function settingOnClick() {
+  outputData.player.name = nameInput.value;
+  outputData.player.age = ageInput.value;
+  outputData.player.grade = gradeInput.value;
+  outputData.player.tall = tallInput.value;
+  outputData.player.gender = genderInput.value;
+  outputData.player.hand = handInput.value;
+  outputData.player.style = styleInput.value;
+  outputData.player.body = bodyInput.value;
+  console.log(outputData.player);
+
+  formDiv.style.display = "none";
+  recordDiv.style.display = "block";
+}
+// form input end
+
+// record page begin
 const inputVideo = document.getElementsByClassName("input-video")[0];
 const outputCanvas = document.getElementsByClassName("output-canvas")[0];
 const canvasCtx = outputCanvas.getContext("2d");
@@ -5,9 +58,9 @@ const chant = document.getElementsByClassName("chant")[0];
 
 inputVideo.style.display = "none";
 
-let keypoints = [];
-let datasets = [];
-let record = false;
+let frameList = [];
+let actionList = [];
+let recordFlag = false;
 
 function onResults(results) {
   canvasCtx.save();
@@ -46,7 +99,7 @@ function onResults(results) {
     lineWidth: 2,
   });
   canvasCtx.restore();
-  keypoints = results.poseLandmarks;
+  frameList = results.poseLandmarks;
 }
 
 const holistic = new Holistic({
@@ -68,15 +121,15 @@ holistic.onResults(onResults);
 
 function recording() {
   setTimeout(function () {
-    record = false;
+    recordFlag = false;
   }, 3000);
-  console.log(keypoints);
-  datasets.push(keypoints);
-  console.log(datasets);
+  console.log(frameList);
+  actionList.push(frameList);
+  console.log(actionList);
 }
 
 function draw() {
-  if (record) {
+  if (recordFlag) {
     recording();
   }
 }
@@ -103,9 +156,9 @@ function convertStoMS(time_position) {
   return res;
 }
 
-const action = ["0:08", "0:28", "0:48", "1:08"]; // recoding time
-const max_field = 4;
-const max_test = 2;
+const startTime = ["0:08", "0:28", "0:48", "1:08"]; // recoding time
+const maxCard = 4;
+const maxRepeat = 2;
 
 function chanting() {
   console.log("started");
@@ -120,17 +173,17 @@ function chanting() {
       let time = convertStoMS(chant.currentTime);
       // console.log(time);
 
-      if (time == action[card]) {
-        record = true;
+      if (time == startTime[card]) {
+        recordFlag = true;
         card++;
       }
 
-      if (card == max_field) {
+      if (card == maxCard) {
         card = 0;
         sum++;
       }
 
-      if (sum == max_test) {
+      if (sum == maxRepeat) {
         chant.loop = false;
       }
     },
@@ -146,3 +199,4 @@ const camera = new Camera(inputVideo, {
   height: 720,
 });
 camera.start();
+// record page end

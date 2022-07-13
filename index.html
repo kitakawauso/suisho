@@ -2,8 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-
     <link href="./style.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- TODO: Responsive support -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.js"></script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
@@ -22,24 +24,86 @@
       crossorigin="anonymous"
     ></script>
   </head>
-
   <body>
-    <div class="container">
-      <div class="contain">
-        <video class="input-video" width="1280px" height="720px"></video>
-        <canvas class="output-canvas" width="1280px" height="720px"></canvas>
-      </div>
+    <div id="form">
+      <label>名前：</label
+      ><input
+        type="text"
+        id="nameForm"
+        placeholder="キタガワリサ"
+        required
+      /><br />
 
-      <div class="contain">
-        <audio
-          src="yomi.mp3"
-          class="chant"
-          onplay="chanting();"
-          controls
-        ></audio>
+      <label for="ageForm">年齢：</label
+      ><input type="text" id="ageForm" placeholder="22" required /><br />
+
+      <label for="gradeForm">段位：</label
+      ><input name="number" id="gradeForm" placeholder="4" required /><br />
+
+      <label for="tallForm">身長：</label
+      ><input type="text" id="tallForm" placeholder="160" required /><br />
+
+      <label>性別：</label
+      ><input type="radio" value="1" onchange="genderChecked(this)" /><label
+        for="man"
+        >男</label
+      >
+      <input type="radio" value="0" onchange="genderChecked(this)" /><label
+        for="woman"
+        >女</label
+      ><br />
+
+      <label>利き手：</label
+      ><input type="radio" value="1" onchange="handChecked(this)" /><label
+        for="right"
+        >右手</label
+      >
+      <input type="radio" value="0" onchange="handChecked(this)" /><label
+        for="left"
+        >左手</label
+      ><br />
+
+      <label>守り</label>
+      <input type="range" id="styleForm" step="10" value="50" />
+      <label>攻め</label><br />
+
+      <label>痩せ型</label>
+      <input type="range" id="bodyForm" step="10" value="50" />
+      <label>筋肉質</label><br />
+
+      <input
+        type="submit"
+        value="Setting"
+        onclick="settingOnClick();"
+        id="settingButton"
+        class="btn btn--radius"
+      />
+    </div>
+
+    <div id="record">
+      <div class="container">
+        <div id="videoBox">
+          <video class="input-video" width="1280px" height="720px"></video>
+          <canvas class="output-canvas" width="1280px" height="720px"></canvas>
+        </div>
+
+        <div id="consoleBox">
+          <h1>Console</h1>
+          <p id="console"></p>
+        </div>
+
+        <div id="controlBox">
+          <div id="field-view"></div>
+          <audio
+            src="yomi.mp3"
+            class="chant"
+            onplay="chanting();"
+            controls
+          ></audio>
+        </div>
       </div>
     </div>
 
-    <script src="./js/holistic.js"></script>
+    <script src="./js/recording.js"></script>
   </body>
 </html>

@@ -1,8 +1,16 @@
 * {
   margin: 0;
   padding: 0;
-
 }
+
+#form {
+  display: block; /* HINT: requirement */
+}
+
+#record {
+  display: none;/* HINT: requirement */
+}
+
 
 .container {
   margin: 1%;
@@ -20,18 +28,19 @@
 }
 
 
-#video-box {
+#videoBox {
   grid-area: video;
   background-color: #333;
   text-align: center;
 }
 
-#console-box {
+#consoleBox {
   grid-area: console;
   background-color: #541;
+  display: block;
 }
 
-#control-box {
+#controlBox {
   grid-area: control;
   background-color: #1a5;
   text-align: center;
