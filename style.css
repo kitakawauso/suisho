@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+
+}
+
+.container {
+  margin: 1%;
+  display: grid;
+    grid-template-rows: 60vh 25vh;
+    grid-template-columns: 50vw 1fr;
+    /* TODO: Responsive support */
+    grid-template-areas:
+      "video    canvas"
+      "console  control";
+}
+
+#video-box {
+  grid-area: video;
+  background-color: #333;
+}
+
+#canvas-box {
+  grid-area: canvas;
+  background-color: #ff2;
+}
+
+#console-box {
+  grid-area: console;
+  background-color: #541;
+}
+
+#control-box {
+  grid-area: control;
+  background-color: #1a5;
+}
+
+.output-canvas {
+  width: 100%;
+}

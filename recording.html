@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
 
     <link href="./style.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- TODO: Responsive support -->
 
     <script
       src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
@@ -21,25 +22,33 @@
       src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js"
       crossorigin="anonymous"
     ></script>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   </head>
 
   <body>
     <div class="container">
-      <div class="contain">
-        <video class="input-video" width="1280px" height="720px"></video>
+      <div id="video-box">
+        <video class="input-video canvas" width="1280px" height="720px"></video>
         <canvas class="output-canvas" width="1280px" height="720px"></canvas>
       </div>
 
-      <div class="contain">
-        <audio
-          src="yomi.mp3"
-          class="chant"
-          onplay="chanting();"
-          controls
-        ></audio>
+      <div id="canvas-box">
+        <div id="myDiv">
+          <!-- Plotly chart will be drawn inside this DIV -->
+        </div>
       </div>
+
+      <div id="console-box">
+        <p id="console"></p>
+      </div>
+
+      <div id="control-box">
+        <div id="field-view"></div>
+      </div>
+      <!-- <audio src="yomi.mp3" class="chant" onplay="chanting();" controls></audio> -->
     </div>
 
-    <script src="./js/holistic.js"></script>
+    <script src="./js/recording.js"></script>
   </body>
 </html>
