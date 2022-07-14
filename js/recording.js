@@ -12,11 +12,13 @@ const outputData = {
     style: 0,
     body: 0,
   },
-  swipe: {
-    position: [6, 15],
-    // default position (右下段端)
-    point: [],
-  },
+  swipe: [],
+};
+
+// [ ]: changed data construction
+const swipeData = {
+  position: [6, 15],
+  keypoints: [],
 };
 
 // form input begin
@@ -55,6 +57,23 @@ function settingOnClick() {
   camera.start();
 }
 // form input end
+
+// card position set begin
+let column;
+let tr;
+let row;
+
+function cardOnClick(td) {
+  let currentChecked = document.getElementsByClassName("swipeCard");
+  currentChecked[0].classList.remove("swipeCard");
+
+  column = td.cellIndex;
+  tr = td.parentNode;
+  row = tr.sectionRowIndex;
+
+  td.classList.add("swipeCard");
+}
+// card position set end
 
 // record page begin
 const inputVideo = document.getElementsByClassName("input-video")[0];
@@ -162,15 +181,29 @@ function convertStoMS(time_position) {
   return res;
 }
 
+const text = document.getElementById("maxRepeat");
+let maxRepeat = 1;
+function downRepeat() {
+  if (text.value > 1) {
+    text.value--;
+  }
+  maxRepeat = text.value;
+  console.log(maxRepeat);
+}
+
+function upRepeat() {
+  text.value++;
+  maxRepeat = text.value;
+  console.log(maxRepeat);
+}
+
+// [ ]: change startTime
 const startTime = ["0:08", "0:28", "0:48", "1:08"]; // recoding time
-const maxCard = 4;
-const maxRepeat = 2;
 
 function chanting() {
   console.log("started");
   chant.loop = true;
 
-  let card = 0;
   let sum = 0;
 
   chant.addEventListener(
@@ -181,16 +214,16 @@ function chanting() {
 
       if (time == startTime[card]) {
         recordFlag = true;
-        card++;
-      }
-
-      if (card == maxCard) {
-        card = 0;
         sum++;
       }
 
       if (sum == maxRepeat) {
         chant.loop = false;
+        if (actionList.length) {
+          swipeData.position = [row, column];
+          swipeData.keypoints.push(actionList);
+          actionList = [];
+        }
       }
     },
     false
@@ -206,16 +239,3 @@ const camera = new Camera(inputVideo, {
 });
 
 // record page end
-
-function cardOnClick(td) {
-  let currentChecked = document.getElementsByClassName("swipeCard");
-  currentChecked[0].classList.remove("swipeCard");
-
-  let column = td.cellIndex;
-  let tr = td.parentNode;
-  let row = tr.sectionRowIndex;
-  outputData.swipe.position = [row, column];
-  console.log(outputData.swipe.position);
-
-  td.classList.add("swipeCard");
-}

@@ -1,6 +1,8 @@
 * {
   margin: 0;
   padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 #form {
@@ -30,13 +32,11 @@
 
 #videoBox {
   grid-area: video;
-  background-color: #333;
   text-align: center;
 }
 
 #consoleBox {
   grid-area: console;
-  background-color: #541;
 }
 
 #fieldBox {
@@ -45,7 +45,6 @@
 
 #controlBox {
   grid-area: control;
-  background-color: #1a5;
   text-align: center;
 }
 
@@ -89,4 +88,20 @@ table td {
 
 .swipeCard {
   background: #f00;
+}
+
+.counterText {
+  width: 80px;
+  line-height: 3rem;
+  text-align: center;
+  border: 0;
+  padding: 0 10px;
+}
+
+.button {
+  font-size: 18px;
+  padding: 5px 25px;
+  background-color: white;
+  border-radius: 100vh;
+  outline: 0;
 }

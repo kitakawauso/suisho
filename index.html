@@ -69,7 +69,6 @@
         value="Setting"
         onclick="settingOnClick();"
         id="settingButton"
-        class="btn btn--radius"
       />
     </div>
 
@@ -207,7 +206,12 @@
         </div>
 
         <div id="controlBox">
-          <div id="field-view"></div>
+          <div id="repeatCounter">
+            <h1>Repeat</h1>
+            <button class="button" id="down" onclick="downRepeat()">－</button>
+            <input type="text" value="1" class="counterText" id="maxRepeat" />
+            <button class="button" id="up" onclick="upRepeat()">＋</button>
+          </div>
           <audio
             src="yomi.mp3"
             class="chant"
