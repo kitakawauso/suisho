@@ -2,19 +2,89 @@
   margin: 0;
   padding: 0;
   border: 0;
+  accent-color: #B6C197;
   background: transparent;
-}
-
-#form {
-  display: block; /* HINT: requirement */
-}
-
-#record {
-  display: none;/* HINT: requirement */
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  -webkit-box-sizing: inherit;
+    box-sizing: inherit;
 }
 
 
-.container {
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.btn {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.5;
+  position: relative;
+  display: inline-block;
+  padding: 1rem 4rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  color: #212529;
+  border-radius: 0.5rem;
+}
+
+.form-container {
+  width: 40vw;
+  margin: 5vw auto;
+  text-align: center;
+}
+
+.form-contents {
+  font-size: large;
+  width: fit-content;
+  text-align: left;
+  margin: 5% auto;
+  padding: 5% 10%;
+  border: 1px dashed #8A9B68;
+  border-radius: 2rem;
+}
+
+.form-contents * {
+  margin: 10px 0;
+}
+
+.text-box {
+  font-size: large;
+  width: 60%;
+    padding: 0.1em 0.5em;
+    border: 1px solid #999;
+    border-radius: 0.3em;
+    background: #D5DDBC;
+    margin: 0.5em 0;
+}
+
+.btn--green {
+  background: #B6C197;
+}
+
+.btn--green.btn--cubic {
+  border-bottom: 5px solid #8A9B68;
+}
+
+.btn--green.btn--cubic:hover {
+  margin-top: 3px;
+  border-bottom: 2px solid #8A9B68;
+}
+
+.btn--radius {
+  border-radius: 100vh;
+}
+
+.record-container {
   margin: 1%;
   display: grid;
     grid-template-rows: 65vh 30vh;
@@ -25,7 +95,7 @@
       "console control";
 }
 
-.container > div {
+.record-container > div {
   padding: 1%;
 }
 
@@ -77,9 +147,19 @@ table {
   height: 100%;
 }
 
+.msgBox {
+  margin: 2%;
+  height: 60%;
+  overflow: scroll;
+}
+
 table td {
   background: #fff5e5;
-  border: solid 2px #461;
+  border: solid 2px #8A9B68;
+}
+
+table td:hover {
+  background: #ddd2a1;
 }
 
 .emptyCard {
@@ -90,18 +170,14 @@ table td {
   background: #f00;
 }
 
+.swipeCard:hover {
+  background: #f00;
+}
+
 .counter-text {
   width: 80px;
   line-height: 3rem;
   text-align: center;
   border: 0;
   padding: 0 10px;
-}
-
-.button {
-  font-size: 18px;
-  padding: 5px 25px;
-  background-color: white;
-  border-radius: 100vh;
-  outline: 0;
 }
