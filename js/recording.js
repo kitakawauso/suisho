@@ -13,7 +13,8 @@ const outputData = {
     body: 0,
   },
   swipe: {
-    position: 0,
+    position: [6, 15],
+    // default position (右下段端)
     point: [],
   },
 };
@@ -23,30 +24,35 @@ let nameInput = document.getElementById("nameForm");
 let ageInput = document.getElementById("ageForm");
 let gradeInput = document.getElementById("gradeForm");
 let tallInput = document.getElementById("tallForm");
-let genderInput;
-function genderChecked(value) {
-  genderInput = value;
-}
-let handInput;
-function handChecked(value) {
-  handInput = value;
-}
+let genderInput = document.getElementsByName("genderForm");
+let handInput = document.getElementsByName("handForm");
 let styleInput = document.getElementById("styleForm");
 let bodyInput = document.getElementById("bodyForm");
+
+function radioChecked(form) {
+  let ans;
+  for (let i = 0; i < form.length; i++) {
+    if (form.item(i).checked) {
+      ans = form.item(i);
+    }
+  }
+  return ans;
+}
 
 function settingOnClick() {
   outputData.player.name = nameInput.value;
   outputData.player.age = ageInput.value;
   outputData.player.grade = gradeInput.value;
   outputData.player.tall = tallInput.value;
-  outputData.player.gender = genderInput.value;
-  outputData.player.hand = handInput.value;
+  outputData.player.gender = radioChecked(genderInput).value;
+  outputData.player.hand = radioChecked(handInput).value;
   outputData.player.style = styleInput.value;
   outputData.player.body = bodyInput.value;
   console.log(outputData.player);
 
   formDiv.style.display = "none";
   recordDiv.style.display = "block";
+  camera.start();
 }
 // form input end
 
@@ -198,5 +204,18 @@ const camera = new Camera(inputVideo, {
   width: 1280,
   height: 720,
 });
-camera.start();
+
 // record page end
+
+function cardOnClick(td) {
+  let currentChecked = document.getElementsByClassName("swipeCard");
+  currentChecked[0].classList.remove("swipeCard");
+
+  let column = td.cellIndex;
+  let tr = td.parentNode;
+  let row = tr.sectionRowIndex;
+  outputData.swipe.position = [row, column];
+  console.log(outputData.swipe.position);
+
+  td.classList.add("swipeCard");
+}

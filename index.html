@@ -27,39 +27,32 @@
   <body>
     <div id="form">
       <label>名前：</label
-      ><input
-        type="text"
-        id="nameForm"
-        placeholder="キタガワリサ"
-        required
-      /><br />
+      ><input type="text" id="nameForm" placeholder="キタガワリサ" /><br />
 
       <label for="ageForm">年齢：</label
-      ><input type="text" id="ageForm" placeholder="22" required /><br />
+      ><input type="text" id="ageForm" placeholder="22" /><br />
 
       <label for="gradeForm">段位：</label
-      ><input name="number" id="gradeForm" placeholder="4" required /><br />
+      ><input name="number" id="gradeForm" placeholder="4" /><br />
 
       <label for="tallForm">身長：</label
-      ><input type="text" id="tallForm" placeholder="160" required /><br />
+      ><input type="text" id="tallForm" placeholder="160" /><br />
 
       <label>性別：</label
-      ><input type="radio" value="1" onchange="genderChecked(this)" /><label
+      ><input type="radio" name="genderForm" value="0" checked /><label
         for="man"
         >男</label
       >
-      <input type="radio" value="0" onchange="genderChecked(this)" /><label
-        for="woman"
+      <input type="radio" name="genderForm" value="1" /><label for="woman"
         >女</label
       ><br />
 
       <label>利き手：</label
-      ><input type="radio" value="1" onchange="handChecked(this)" /><label
+      ><input type="radio" name="handForm" value="0" checked /><label
         for="right"
         >右手</label
       >
-      <input type="radio" value="0" onchange="handChecked(this)" /><label
-        for="left"
+      <input type="radio" name="handForm" value="1" /><label for="left"
         >左手</label
       ><br />
 
@@ -85,6 +78,127 @@
         <div id="videoBox">
           <video class="input-video" width="1280px" height="720px"></video>
           <canvas class="output-canvas" width="1280px" height="720px"></canvas>
+        </div>
+
+        <div id="fieldBox">
+          <h1>Swipe position</h1>
+          <div id="fieldWrapper">
+            <div id="fieldTable">
+              <table id="cardTable">
+                <tr>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                </tr>
+                <tr>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                </tr>
+                <tr>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                </tr>
+                <tr>
+                  <th colspan="16"></th>
+                </tr>
+                <tr>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                </tr>
+                <tr>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                </tr>
+                <tr>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td class="emptyCard"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);"></td>
+                  <td onclick="cardOnClick(this);" class="swipeCard"></td>
+                </tr>
+              </table>
+            </div>
+          </div>
         </div>
 
         <div id="consoleBox">
