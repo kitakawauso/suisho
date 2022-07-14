@@ -1,3 +1,29 @@
+// json for output setting begin
+const outputData = {
+  player: {
+    name: "unknown",
+    age: 0,
+    grade: 0,
+    tall: 0,
+    gender: 0,
+    hand: 0,
+    style: 0,
+    body: 0,
+  },
+  swipe: [],
+};
+
+const swipeData = {
+  position: [6, 15], // default 自陣右下段
+  keypoints: [],
+};
+
+let oneSwipe = [];
+let oneFrame = [];
+
+// data structure
+// outputData -> swipe -> oneSwipe -> oneFrame
+
 // form input begin
 let nameInput = document.getElementById("nameForm");
 let ageInput = document.getElementById("ageForm");
@@ -55,9 +81,9 @@ function writeToConsole(msg, type) {
 // console end
 
 // card position set begin
-let column;
+let column = 15;
 let tr;
-let row;
+let row = 6;
 
 function cardOnClick(td) {
   if (recordFlag) {
@@ -107,32 +133,6 @@ const chant = document.getElementsByClassName("chant")[0];
 
 inputVideo.style.display = "none";
 // base setting end
-
-// json for output setting begin
-const outputData = {
-  player: {
-    name: "unknown",
-    age: 0,
-    grade: 0,
-    tall: 0,
-    gender: 0,
-    hand: 0,
-    style: 0,
-    body: 0,
-  },
-  swipe: [],
-};
-
-const swipeData = {
-  position: [6, 15], // default 自陣右下段
-  keypoints: [],
-};
-
-let oneSwipe = [];
-let oneFrame = [];
-
-// data structure
-// outputData -> swipe -> oneSwipe -> oneFrame
 
 // json for output setting end
 
@@ -196,8 +196,9 @@ holistic.onResults(onResults);
 function recording2sec() {
   setTimeout(function () {
     recordFlag = false;
-  }, 2000);
+  }, 1000);
   oneSwipe.push(oneFrame);
+  console.log(oneSwipe);
 }
 
 let recordFlag = false;
@@ -208,12 +209,14 @@ function draw() {
     recording2sec();
   } else if (oneSwipe.length) {
     swipeData.position = [row, column];
-    swipeData.keypoints.push(oneSwipe);
+    // console.log(oneSwipe);
+    swipeData.keypoints = oneSwipe;
+    // console.log(swipeData);
     outputData.swipe.push(swipeData);
-    writeToConsole(outputData.swipe, "msg");
+    console.log(outputData);
+    writeToConsole(outputData, "msg");
 
     oneSwipe = [];
-    swipeData.keypoints = [];
   }
 }
 
@@ -260,6 +263,7 @@ function chanting() {
 
       if (count >= maxRepeat) {
         chant.loop = false;
+        count = 0;
       }
     },
     false
