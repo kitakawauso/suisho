@@ -64,14 +64,18 @@ let tr;
 let row;
 
 function cardOnClick(td) {
-  let currentChecked = document.getElementsByClassName("swipeCard");
-  currentChecked[0].classList.remove("swipeCard");
+  if (recordFlag) {
+    console.log("Can't change card during recording.");
+  } else {
+    let currentChecked = document.getElementsByClassName("swipeCard");
+    currentChecked[0].classList.remove("swipeCard");
 
-  column = td.cellIndex;
-  tr = td.parentNode;
-  row = tr.sectionRowIndex;
+    column = td.cellIndex;
+    tr = td.parentNode;
+    row = tr.sectionRowIndex;
 
-  td.classList.add("swipeCard");
+    td.classList.add("swipeCard");
+  }
 }
 // card position set end
 
@@ -147,7 +151,7 @@ holistic.onResults(onResults);
 function recording() {
   setTimeout(function () {
     recordFlag = false;
-  }, 3000);
+  }, 2000);
   console.log(frameList);
   actionList.push(frameList);
   console.log(actionList);
@@ -181,45 +185,46 @@ function convertStoMS(time_position) {
   return res;
 }
 
-const text = document.getElementById("maxRepeat");
+const counterText = document.getElementById("counterText");
 let maxRepeat = 1;
 function downRepeat() {
-  if (text.value > 1) {
-    text.value--;
+  if (counterText.value > 1) {
+    counterText.value--;
   }
-  maxRepeat = text.value;
+  maxRepeat = counterText.value;
   console.log(maxRepeat);
 }
 
 function upRepeat() {
-  text.value++;
-  maxRepeat = text.value;
+  counterText.value++;
+  maxRepeat = counterText.value;
   console.log(maxRepeat);
 }
 
 // [ ]: change startTime
-const startTime = ["0:08", "0:28", "0:48", "1:08"]; // recoding time
+const startTime = "0:08"; // recoding time
 
 function chanting() {
   console.log("started");
   chant.loop = true;
 
-  let sum = 0;
+  let count = 0;
 
   chant.addEventListener(
     "timeupdate",
     function () {
       let time = convertStoMS(chant.currentTime);
-      // console.log(time);
 
-      if (time == startTime[card]) {
+      if (time == startTime && !recordFlag) {
         recordFlag = true;
-        sum++;
+        count++;
       }
 
-      if (sum == maxRepeat) {
+      if (count >= maxRepeat) {
         chant.loop = false;
+
         if (actionList.length) {
+          // TODO: this position
           swipeData.position = [row, column];
           swipeData.keypoints.push(actionList);
           actionList = [];
