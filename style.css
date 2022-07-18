@@ -107,6 +107,7 @@ html {
 
 #consoleBox {
   grid-area: console;
+  padding: 2% 5%;
 }
 
 #fieldBox {
@@ -180,4 +181,8 @@ table td:hover {
   text-align: center;
   border: 0;
   padding: 0 10px;
+}
+
+.chant {
+  margin: 5% 2%;
 }
