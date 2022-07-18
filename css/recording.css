@@ -1,71 +1,13 @@
-/* setting begin */
-* {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  accent-color: #B6C197;
-  background: transparent;
-  font-family: 'Zen Kaku Gothic New', sans-serif;
-  -webkit-box-sizing: inherit;
-    box-sizing: inherit;
-}
-
-
-html {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-.btn {
-  font-size: 1.2rem;
-  font-weight: 700;
-  line-height: 1.5;
-  position: relative;
-  display: inline-block;
-  padding: 1rem 4rem;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  text-align: center;
-  vertical-align: middle;
-  text-decoration: none;
-  letter-spacing: 0.1em;
-  color: #212529;
-  border-radius: 0.5rem;
-}
-
-.btn--green {
-  background: #B6C197;
-}
-
-.btn--green.btn--cubic {
-  border-bottom: 5px solid #8A9B68;
-}
-
-.btn--green.btn--cubic:hover {
-  margin-top: 3px;
-  border-bottom: 2px solid #8A9B68;
-}
-
-.btn--radius {
-  border-radius: 100vh;
-}
-/* setting end */
-
 /* record container grid layout begin */
 .record-container {
   margin: 1%;
   display: grid;
     grid-template-rows: 60vh 20vh;
-    grid-template-columns: 35vw 30vw 30vw;
+    grid-template-columns: 30vw 30vw 35vw;
     /* TODO: Responsive support */
     grid-template-areas:
       "video   video   form"
-      "console control field";
+      "field control console";
 }
 
 .record-container > div {
@@ -83,8 +25,8 @@ html {
   text-align: center;
 }
 
-#consoleBox {
-  grid-area: console;
+#fieldBox {
+  grid-area: field;
 }
 
 #controlBox {
@@ -92,8 +34,8 @@ html {
   text-align: center;
 }
 
-#fieldBox {
-  grid-area: field;
+#consoleBox {
+  grid-area: console;
 }
 
 /* record container grid layout end */
@@ -124,19 +66,6 @@ html {
   margin: 0.2em 0;
 }
 /* form end */
-
-/* console begin */
-.stateBox {
-  padding-left: 10%;
-}
-
-.msgBox {
-  margin: 2%;
-  padding-left: 10%;
-  height: 60%;
-  overflow: scroll;
-}
-/* console end */
 
 /* field begin */
 #fieldWrapper {
@@ -199,3 +128,17 @@ table td:hover {
   margin: 10% 5%;
 }
 /* control end */
+
+/* console begin */
+.stateBox {
+  padding-left: 10%;
+}
+
+.msgBox {
+  margin: 2%;
+  padding-left: 10%;
+  height: 60%;
+  overflow: scroll;
+}
+
+/* console end */

@@ -1,38 +1,12 @@
-// json for output setting begin
-const outputData = {
-  player: {
-    name: "unknown",
-    age: 0,
-    grade: 0,
-    tall: 0,
-    gender: 0,
-    hand: 0,
-    style: 0,
-    body: 0,
-  },
-  swipe: [],
-};
-
-const swipeData = {
-  position: [6, 15], // default 自陣右下段
-  keypoints: [],
-};
-
-let oneSwipe = [];
-let oneFrame = [];
-
-// data structure
-// outputData -> swipe -> oneSwipe -> oneFrame
-// json for output setting end
-
-// record page begin
 // base setting begin
 const inputVideo = document.getElementsByClassName("input-video")[0];
 const outputCanvas = document.getElementsByClassName("output-canvas")[0];
 const canvasCtx = outputCanvas.getContext("2d");
 const chant = document.getElementsByClassName("chant")[0];
+const saveBtn = document.getElementsByClassName("save-btn")[0];
 
 inputVideo.style.display = "none";
+saveBtn.style.display = "none";
 // base setting end
 
 function onResults(results) {
@@ -73,6 +47,7 @@ function onResults(results) {
   });
   canvasCtx.restore();
   oneFrame = results.poseLandmarks;
+  console.log(results.poseLandmarks);
 }
 
 const holistic = new Holistic({
@@ -111,7 +86,6 @@ function draw() {
     // console.log(swipeData);
     outputData.swipe.push(swipeData);
     console.log(outputData);
-    writeToConsole(outputData, "msg");
 
     oneSwipe = [];
   }
@@ -161,6 +135,7 @@ function chanting() {
       if (count >= maxRepeat) {
         chant.loop = false;
         count = 0;
+        saveBtn.style.display = "block";
       }
     },
     false
@@ -175,4 +150,15 @@ const camera = new Camera(inputVideo, {
   height: 720,
 });
 
-// record page end
+function saveOnClick() {
+  // saveボタンクリックでjsonファイルを保存
+  console.log(outputData);
+  let json_data = JSON.stringify(outputData);
+  let blob = new Blob([json_data], {
+    type: "text/plan",
+  });
+  let link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = outputData.player.name + ".json";
+  link.click();
+}

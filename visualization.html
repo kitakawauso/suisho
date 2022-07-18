@@ -16,8 +16,6 @@
       type="text/css"
       media="all"
     />
-    <link href="./css/style.css" rel="stylesheet" type="text/css" media="all" />
-
     <!-- TODO: Responsive support -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.js"></script>
@@ -38,18 +36,36 @@
       src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
-
-  <body>
-    <div id="menuBox">
-      <a href="./recording.html" class="btn btn--cubic btn--green btn--radius"
-        >recording</a
-      >
-      <a
-        href="./visualization.html"
-        class="btn btn--cubic btn--green btn--radius"
-        >visualization</a
-      >
+  <body onload="readFile()">
+    <div id="fileform">
+      <h2>JSON File input</h2>
+      <div class="element">
+        <input type="file" id="getFile" accept=".json" />
+        <pre id="preview">ここに jsonファイルの内容を表示</pre>
+      </div>
     </div>
+
+    <div class="control-bar">
+      <div class="slider-box element">
+        <h2>Animation slider</h2>
+        <input
+          type="range"
+          min="0"
+          max="50"
+          step="1"
+          value="0"
+          class="animation-slider"
+          id="slider"
+        />
+        <div class="output" id="sliderInput">0</div>
+      </div>
+    </div>
+
+    </div>
+    <script src="./js/json.js"></script>
+    <script src="./js/readData.js"></script>
+    <script src="./js/visualization.js"></script>
   </body>
 </html>
