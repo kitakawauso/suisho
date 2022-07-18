@@ -15,7 +15,7 @@ function readFile() {
       input = eval("(" + input + ")");
       console.log(input);
 
-      inputData = input.swipe[0].keypoints[0];
+      inputData = input.swipe[0].keypoints[10];
       console.log(inputData);
     };
   };

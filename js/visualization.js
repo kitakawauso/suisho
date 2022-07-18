@@ -1,14 +1,20 @@
+const canvasWidth = 640;
+const canvasHeight = 360;
+
 function setup() {
-  createCanvas(600, 600, WEBGL);
+  createCanvas(canvasWidth, canvasHeight, WEBGL);
   normalMaterial();
 }
 
 function animation() {
-  // console.log(inputData);
   for (var i = 0; i < inputData.length; i++) {
     // console.log(inputData[i].x);
 
-    translate(inputData[i].x * 100, inputData[i].y * 100, inputData[i].z * 100);
+    translate(
+      inputData[i].x * canvasWidth,
+      inputData[i].y * canvasHeight,
+      inputData[i].z * 200
+    );
     fill(0);
     sphere(5);
   }
