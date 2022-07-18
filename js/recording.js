@@ -44,11 +44,6 @@ function radioChecked(formInput) {
   return ans;
 }
 
-const formPage = document.getElementById("formPage");
-const recordPage = document.getElementById("recordPage");
-
-recordPage.style.display = "none";
-
 function settingOnClick() {
   outputData.player.name = nameInput.value;
   outputData.player.age = ageInput.value;
@@ -60,8 +55,6 @@ function settingOnClick() {
   outputData.player.body = bodyInput.value;
   console.log(outputData.player);
 
-  formPage.style.display = "none";
-  recordPage.style.display = "block";
   camera.start();
   writeToConsole("Please set card position.", "state");
 }

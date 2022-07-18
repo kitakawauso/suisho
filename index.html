@@ -33,8 +33,13 @@
     ></script>
   </head>
   <body>
-    <div id="formPage">
-      <div class="form-container">
+    <div class="record-container">
+      <div id="videoBox">
+        <video class="input-video" width="1280px" height="720px"></video>
+        <canvas class="output-canvas" width="1280px" height="720px"></canvas>
+      </div>
+
+      <div id="formBox">
         <h1 class="form-title">Player information</h1>
 
         <div class="form-contents">
@@ -105,172 +110,158 @@
           id="settingButton"
         />
       </div>
-    </div>
 
-    <div id="recordPage">
-      <div class="record-container">
-        <div id="videoBox">
-          <video class="input-video" width="1280px" height="720px"></video>
-          <canvas class="output-canvas" width="1280px" height="720px"></canvas>
-        </div>
-
-        <div id="fieldBox">
-          <h1>Swipe position</h1>
-          <div id="fieldWrapper">
-            <div id="fieldTable">
-              <table id="cardTable">
-                <tr>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                </tr>
-                <tr>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                </tr>
-                <tr>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                </tr>
-                <tr>
-                  <th colspan="16"></th>
-                </tr>
-                <tr>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                </tr>
-                <tr>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                </tr>
-                <tr>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td class="emptyCard"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);"></td>
-                  <td onclick="cardOnClick(this);" class="swipeCard"></td>
-                </tr>
-              </table>
-            </div>
+      <div id="fieldBox">
+        <h1>Swipe position</h1>
+        <div id="fieldWrapper">
+          <div id="fieldTable">
+            <table id="cardTable">
+              <tr>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+              </tr>
+              <tr>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+              </tr>
+              <tr>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+              </tr>
+              <tr>
+                <th colspan="16"></th>
+              </tr>
+              <tr>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+              </tr>
+              <tr>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+              </tr>
+              <tr>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);" class="swipeCard"></td>
+              </tr>
+            </table>
           </div>
         </div>
+      </div>
 
-        <div id="consoleBox">
-          <h1 id="stateLog"></h1>
-          <div class="msgBox"><p id="consoleLog"></p></div>
-        </div>
+      <div id="consoleBox">
+        <div class="stateBox"><h1 id="stateLog"></h1></div>
+        <div class="msgBox"><p id="consoleLog"></p></div>
+      </div>
 
-        <div id="controlBox">
-          <div id="repeatCounter">
-            <h1>Repeat</h1>
-            <button
-              class="btn btn--green btn--cubic btn--radius"
-              id="down"
-              onclick="downRepeat()"
-            >
-              －
-            </button>
-            <input
-              type="text"
-              value="1"
-              class="counter-text"
-              id="counterText"
-            />
-            <button
-              class="btn btn--green btn--cubic btn--radius"
-              id="up"
-              onclick="upRepeat()"
-            >
-              ＋
-            </button>
-          </div>
-          <audio
-            src="./chant.mp3"
-            class="chant"
-            onplay="chanting();"
-            controls
-          ></audio>
+      <div id="controlBox">
+        <div id="repeatCounter">
+          <h1>Repeat</h1>
+          <button
+            class="btn btn--green btn--cubic btn--radius"
+            id="down"
+            onclick="downRepeat()"
+          >
+            －
+          </button>
+          <input type="text" value="1" class="counter-text" id="counterText" />
+          <button
+            class="btn btn--green btn--cubic btn--radius"
+            id="up"
+            onclick="upRepeat()"
+          >
+            ＋
+          </button>
         </div>
+        <audio
+          src="./chant.mp3"
+          class="chant"
+          onplay="chanting();"
+          controls
+        ></audio>
       </div>
     </div>
 

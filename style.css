@@ -1,3 +1,4 @@
+/* setting begin */
 * {
   margin: 0;
   padding: 0;
@@ -16,7 +17,7 @@ html {
 }
 
 .btn {
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   font-weight: 700;
   line-height: 1.5;
   position: relative;
@@ -37,36 +38,6 @@ html {
   border-radius: 0.5rem;
 }
 
-.form-container {
-  width: 40vw;
-  margin: 5vw auto;
-  text-align: center;
-}
-
-.form-contents {
-  font-size: large;
-  width: fit-content;
-  text-align: left;
-  margin: 5% auto;
-  padding: 5% 10%;
-  border: 1px dashed #8A9B68;
-  border-radius: 2rem;
-}
-
-.form-contents * {
-  margin: 10px 0;
-}
-
-.text-box {
-  font-size: large;
-  width: 60%;
-    padding: 0.1em 0.5em;
-    border: 1px solid #999;
-    border-radius: 0.3em;
-    background: #D5DDBC;
-    margin: 0.5em 0;
-}
-
 .btn--green {
   background: #B6C197;
 }
@@ -83,25 +54,32 @@ html {
 .btn--radius {
   border-radius: 100vh;
 }
+/* setting end */
 
+/* record container grid layout begin */
 .record-container {
   margin: 1%;
   display: grid;
-    grid-template-rows: 65vh 30vh;
-    grid-template-columns: 65vw 30vw;
+    grid-template-rows: 60vh 20vh;
+    grid-template-columns: 35vw 30vw 30vw;
     /* TODO: Responsive support */
     grid-template-areas:
-      "video   field"
-      "console control";
+      "video   video   form"
+      "console control field";
 }
 
 .record-container > div {
-  padding: 1%;
+  padding: 5%;
 }
 
-
 #videoBox {
+  padding: 0;
   grid-area: video;
+  text-align: center;
+}
+
+#formBox {
+  grid-area: form;
   text-align: center;
 }
 
@@ -109,19 +87,58 @@ html {
   grid-area: console;
 }
 
-#fieldBox {
-  grid-area: field;
-}
-
 #controlBox {
   grid-area: control;
   text-align: center;
 }
 
+#fieldBox {
+  grid-area: field;
+}
+
+/* record container grid layout end */
+
 .output-canvas {
   height: 100%;
 }
 
+/* form begin */
+
+.form-contents {
+  font-size: medium;
+  width: fit-content;
+  text-align: left;
+  margin: 5% auto;
+  padding: 5% 10%;
+  border: 1px dashed #8A9B68;
+  border-radius: 2rem;
+}
+
+.text-box {
+  font-size: large;
+  width: 60%;
+  padding: 0 0.3em;
+  border: 1px solid #999;
+  border-radius: 0.3em;
+  background: #D5DDBC;
+  margin: 0.2em 0;
+}
+/* form end */
+
+/* console begin */
+.stateBox {
+  padding-left: 10%;
+}
+
+.msgBox {
+  margin: 2%;
+  padding-left: 10%;
+  height: 60%;
+  overflow: scroll;
+}
+/* console end */
+
+/* field begin */
 #fieldWrapper {
   margin: auto;
   position: relative;
@@ -147,12 +164,6 @@ table {
   height: 100%;
 }
 
-.msgBox {
-  margin: 2%;
-  height: 60%;
-  overflow: scroll;
-}
-
 table td {
   background: #fff5e5;
   border: solid 2px #8A9B68;
@@ -173,7 +184,9 @@ table td:hover {
 .swipeCard:hover {
   background: #f00;
 }
+/* field end */
 
+/* control begin */
 .counter-text {
   width: 80px;
   line-height: 3rem;
@@ -181,3 +194,8 @@ table td:hover {
   border: 0;
   padding: 0 10px;
 }
+
+.chant {
+  margin: 10% 5%;
+}
+/* control end */
