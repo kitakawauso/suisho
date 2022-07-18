@@ -23,99 +23,7 @@ let oneFrame = [];
 
 // data structure
 // outputData -> swipe -> oneSwipe -> oneFrame
-
-// form input begin
-let nameInput = document.getElementById("nameForm");
-let ageInput = document.getElementById("ageForm");
-let gradeInput = document.getElementById("gradeForm");
-let tallInput = document.getElementById("tallForm");
-let genderInput = document.getElementsByName("genderForm");
-let handInput = document.getElementsByName("handForm");
-let styleInput = document.getElementById("styleForm");
-let bodyInput = document.getElementById("bodyForm");
-
-function radioChecked(formInput) {
-  let ans;
-  for (let i = 0; i < formInput.length; i++) {
-    if (formInput.item(i).checked) {
-      ans = formInput.item(i);
-    }
-  }
-  return ans;
-}
-
-function settingOnClick() {
-  outputData.player.name = nameInput.value;
-  outputData.player.age = ageInput.value;
-  outputData.player.grade = gradeInput.value;
-  outputData.player.tall = tallInput.value;
-  outputData.player.gender = radioChecked(genderInput).value;
-  outputData.player.hand = radioChecked(handInput).value;
-  outputData.player.style = styleInput.value;
-  outputData.player.body = bodyInput.value;
-  console.log(outputData.player);
-
-  camera.start();
-  writeToConsole("Please set card position.", "state");
-}
-// form input end
-
-// console begin
-const consoleLog = document.getElementById("consoleLog");
-const stateLog = document.getElementById("stateLog");
-function writeToConsole(msg, type) {
-  if (type == "msg") {
-    consoleLog.innerHTML += msg + "<br>";
-  } else if (type == "state") {
-    stateLog.innerHTML = msg;
-  }
-}
-
-// console end
-
-// card position set begin
-let column = 15;
-let tr;
-let row = 6;
-
-function cardOnClick(td) {
-  if (recordFlag) {
-    console.log("Can't change card during recording2sec.");
-  } else {
-    let currentChecked = document.getElementsByClassName("swipeCard");
-    currentChecked[0].classList.remove("swipeCard");
-
-    column = td.cellIndex;
-    tr = td.parentNode;
-    row = tr.sectionRowIndex;
-
-    td.classList.add("swipeCard");
-    writeToConsole("card position is " + row + " " + column + ".", "msg");
-    writeToConsole("Please set repeat counter.", "state");
-  }
-}
-// card position set end
-
-// counter begin
-const counterText = document.getElementById("counterText");
-let maxRepeat = 1;
-
-function downRepeat() {
-  if (counterText.value > 1) {
-    counterText.value--;
-  }
-  maxRepeat = counterText.value;
-  // writeToConsole("repeat counter is " + maxRepeat + ".", "msg");
-  writeToConsole("Let's start recording.", "state");
-}
-
-function upRepeat() {
-  counterText.value++;
-  maxRepeat = counterText.value;
-  // writeToConsole("repeat counter is " + maxRepeat + ".", "msg");
-  writeToConsole("Let's start recording.", "state");
-}
-// counter end
+// json for output setting end
 
 // record page begin
 // base setting begin
@@ -126,8 +34,6 @@ const chant = document.getElementsByClassName("chant")[0];
 
 inputVideo.style.display = "none";
 // base setting end
-
-// json for output setting end
 
 function onResults(results) {
   canvasCtx.save();
@@ -193,8 +99,6 @@ function recording2sec() {
   oneSwipe.push(oneFrame);
   console.log(oneSwipe);
 }
-
-let recordFlag = false;
 
 function draw() {
   // Instant execution
