@@ -272,20 +272,26 @@
       </div>
 
       <div id="consoleBox">
-        <div class="stateBox"><h1 id="stateLog"></h1></div>
-        <div class="msgBox"><p id="consoleLog"></p></div>
-        <div class="save-btn">
+        <div class="state-box"><h1 id="stateLog"></h1></div>
+        <div class="msg-box"><p id="consoleLog"></p></div>
+
+        <div id="consoleBtn">
           <button
+            name="saveBtn"
             class="btn btn--cubic btn--green btn--radius"
             onclick="saveOnClick()"
+            disabled
           >
             save
           </button>
-          <a
+          <button
             href="./visualization.html"
+            name="visBtn"
             class="btn btn--cubic btn--green btn--radius"
-            >visualization</a
+            disabled
           >
+            visualization
+          </button>
         </div>
       </div>
     </div>

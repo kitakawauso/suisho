@@ -100,6 +100,7 @@ table td {
 
 table td:hover {
   background: #ddd2a1;
+  cursor: pointer;
 }
 
 .emptyCard {
@@ -130,12 +131,13 @@ table td:hover {
 /* control end */
 
 /* console begin */
-.stateBox {
+
+.state-box {
   padding-left: 10%;
 }
 
-.msgBox {
-  margin: 2%;
+.msg-box {
+  margin: 5%;
   padding-left: 10%;
   height: 60%;
   overflow: scroll;

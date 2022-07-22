@@ -3,10 +3,10 @@ const inputVideo = document.getElementsByClassName("input-video")[0];
 const outputCanvas = document.getElementsByClassName("output-canvas")[0];
 const canvasCtx = outputCanvas.getContext("2d");
 const chant = document.getElementsByClassName("chant")[0];
-const saveBtn = document.getElementsByClassName("save-btn")[0];
+const saveBtn = document.getElementsByName("saveBtn")[0];
+const visBtn = document.getElementsByName("visBtn")[0];
 
 inputVideo.style.display = "none";
-saveBtn.style.display = "none";
 // base setting end
 
 function onResults(results) {
@@ -135,7 +135,8 @@ function chanting() {
       if (count >= maxRepeat) {
         chant.loop = false;
         count = 0;
-        saveBtn.style.display = "block";
+        saveBtn.disabled = false;
+        visBtn.disabled = false;
       }
     },
     false

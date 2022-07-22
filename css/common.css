@@ -3,7 +3,7 @@
   padding: 0;
   border: 0;
   accent-color: #B6C197;
-  background: transparent;
+  /* background: transparent; */
   font-family: 'Zen Kaku Gothic New', sans-serif;
   -webkit-box-sizing: inherit;
     box-sizing: inherit;
@@ -52,4 +52,15 @@ html {
 
 .btn--radius {
   border-radius: 100vh;
+}
+
+.btn:disabled {
+  background: #aaa;
+  border-bottom: 0;
+  cursor: default;
+}
+
+.btn:disabled:hover {
+  margin-top: 0;
+  border-bottom: 0;
 }
