@@ -16,6 +16,12 @@
       type="text/css"
       media="all"
     />
+    <link
+      href="./css/visualization.css"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
     <!-- TODO: Responsive support -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.js"></script>
@@ -39,14 +45,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
   <body onload="readFile()">
-    <div id="fileform">
+    <div class="player-box">
+    <div class="file-box" id="fileform">
       <h2>JSON File input</h2>
       <div class="element">
         <input type="file" id="getFile" accept=".json" />
       </div>
     </div>
+    <h2>Clustering</h2>
+      <div id="clusteringBox">
 
-    <div class="control-bar">
+      </div>
+      </div>
+
+    <div class="control-box">
       <div class="slider-box element">
         <h2>Animation slider</h2>
         <input
@@ -60,13 +72,9 @@
         />
         <div class="output" id="sliderInput">0</div>
       </div>
-
-      <div id="clusteringBox">
-
-      </div>
     </div>
 
-    <div id="canvas">
+    <div class="canvas-box" id="canvas">
       <div class="camera-control">
         <button
           class="btn btn--cubic btn--green btn--radius"
