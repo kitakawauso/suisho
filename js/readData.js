@@ -8,7 +8,6 @@ function readFile() {
     var reader = new FileReader();
 
     reader.readAsText(fileList[0]);
-    document.querySelector("#preview").textContent = reader.result;
 
     reader.onload = function () {
       var input = reader.result.replace(/[\n\r]/g, "");
