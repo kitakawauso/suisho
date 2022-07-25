@@ -1,4 +1,5 @@
 let input = 0;
+let clustering = [];
 
 function readFile() {
   var file = document.querySelector("#getFile");
@@ -14,8 +15,7 @@ function readFile() {
       input = eval("(" + input + ")");
       console.log(input);
 
-      // inputData = input.swipe[0].keypoints.pose;
-
+      clustering = [];
       makeClusteringBox();
     };
   };
@@ -33,11 +33,18 @@ function slideFrame() {
 
 let clusteringBox = document.getElementById("clusteringBox");
 function makeClusteringBox() {
+  while (clusteringBox.firstChild) {
+    clusteringBox.removeChild(clusteringBox.firstChild);
+  }
+
   for (var i = 0; i < input.swipe.length; i++) {
+    clustering.push(1);
+
     var element = document.createElement("input");
     element.type = "checkbox";
     element.id = "cluster" + i;
     element.value = i;
+    element.checked = true;
     element.addEventListener("change", clusterChange);
 
     var label = document.createElement("label");
@@ -53,5 +60,11 @@ function makeClusteringBox() {
 }
 
 function clusterChange() {
-  // TODO: cluster changing
+  var v = this.value;
+  if (this.checked) {
+    clustering[v] = 1;
+  } else {
+    clustering[v] = 0;
+  }
+  // console.log(clustering);
 }

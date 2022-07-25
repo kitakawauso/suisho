@@ -78,7 +78,7 @@ function recording2sec() {
   rightHandSwipe.push(rightHandFrame);
   console.log(poseSwipe);
   console.log(leftHandSwipe);
-  console.log(rightHandSwipe); // TODO: kokomade
+  console.log(rightHandSwipe);
 }
 
 function draw() {
@@ -91,7 +91,7 @@ function draw() {
     rightHandSwipe.length
   ) {
     swipeData.position = [row, column];
-    // console.log(poseSwipe);
+
     swipeData.keypoints.pose = poseSwipe;
     swipeData.keypoints.hand.left = leftHandSwipe;
     swipeData.keypoints.hand.right = rightHandSwipe;

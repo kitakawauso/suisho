@@ -76,7 +76,7 @@ function drawPlane() {
   pop();
 }
 
-function drawStroke(data) {
+function drawStroke(data, color) {
   for (var i = 0; i < node.length; i++) {
     let x1 = data[i].x * 300 - 200;
     let y1 = data[i].y * 300 - 250;
@@ -87,13 +87,13 @@ function drawStroke(data) {
       let y2 = data[d].y * 300 - 250;
       let z2 = -data[d].z * 200;
 
-      stroke(0);
+      stroke(color[0], color[1], color[2]);
       line(x1, y1, z1, x2, y2, z2);
     }
   }
 }
 
-function drawSphere(data) {
+function drawSphere(data, color) {
   for (var i = 0; i < data.length; i++) {
     // console.log(data[i]);
     let x = data[i].x * 300 - 200;
@@ -102,7 +102,8 @@ function drawSphere(data) {
 
     push();
     translate(x, y, z);
-    fill(0);
+    fill(color[0], color[1], color[2]);
+    stroke(color[0], color[1], color[2]);
     sphere(1);
     pop();
   }
@@ -113,11 +114,14 @@ function draw() {
   drawPlane();
   orbitControl();
 
-  // copied  inputData = input.swipe[0].keypoints.pose;
-
-  if (input.length) {
-    // let data = inputData[frame];
-    drawSphere(data);
-    drawStroke(data);
+  if (clustering.length) {
+    for (var i = 0; i < clustering.length; i++) {
+      if (clustering[i]) {
+        let data = input.swipe[i].keypoints.pose[frame];
+        let color = colorList[i];
+        drawSphere(data, color);
+        drawStroke(data, color);
+      }
+    }
   }
 }

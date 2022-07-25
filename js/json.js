@@ -37,3 +37,16 @@ let rightHandFrame = [];
 // outputData -> swipe(swipeData) -> keypoints -> pose          -> poseSwipe      -> poseFrame
 //                                             -> hand -> left  -> leftHandSwipe  -> leftHandFrame
 //                                             -> hand -> right -> rightHandSwipe -> rightHandFrame
+
+let colorList = [
+  [51, 34, 136],
+  [136, 204, 238],
+  [68, 170, 153],
+  [17, 119, 51],
+  [153, 153, 51],
+  [221, 204, 119],
+  [204, 102, 119],
+  [136, 34, 58],
+  [170, 68, 153],
+  [100, 100, 100],
+];
