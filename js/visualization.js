@@ -113,8 +113,10 @@ function draw() {
   drawPlane();
   orbitControl();
 
-  if (inputData.length) {
-    let data = inputData[frame];
+  // copied  inputData = input.swipe[0].keypoints.pose;
+
+  if (input.length) {
+    // let data = inputData[frame];
     drawSphere(data);
     drawStroke(data);
   }
