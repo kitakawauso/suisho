@@ -1,5 +1,5 @@
-const canvasWidth = 640;
-const canvasHeight = 360;
+const canvasWidth = 1280;
+const canvasHeight = 720;
 
 const node = [
   [1, 4], //   0: nose
@@ -71,6 +71,10 @@ function setup() {
   camera(100, -100, 350, 0, 0, 0, 0, 1, 0);
 }
 
+function viewReset() {
+  camera(100, -100, 350, 0, 0, 0, 0, 1, 0);
+}
+
 function drawStroke(data) {
   for (var i = 0; i < node.length; i++) {
     let x1 = data[i].x * 300 - 200;
@@ -103,12 +107,9 @@ function drawSphere(data) {
   }
 }
 
-// animation();
-
 function draw() {
   background(300);
   drawPlane();
-  // キャンバス上をマウスでぐりぐりできる
   orbitControl();
 
   if (inputData.length) {
