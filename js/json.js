@@ -14,11 +14,25 @@ const outputData = {
 
 const swipeData = {
   position: [6, 15], // default 自陣右下段
-  keypoints: [],
+  keypoints: {
+    pose: [],
+    hand: {
+      left: [],
+      right: [],
+    },
+  },
 };
 
-let oneSwipe = [];
-let oneFrame = [];
+let poseSwipe = [];
+let poseFrame = [];
+
+let leftHandSwipe = [];
+let leftHandFrame = [];
+
+let rightHandSwipe = [];
+let rightHandFrame = [];
 
 // data structure
-// outputData -> swipe -> oneSwipe -> oneFrame
+// outputData -> swipe(swipeData) -> keypoints -> pose          -> poseSwipe      -> poseFrame
+//                                             -> hand -> left  -> leftHandSwipe  -> leftHandFrame
+//                                             -> hand -> right -> rightHandSwipe -> rightHandFrame

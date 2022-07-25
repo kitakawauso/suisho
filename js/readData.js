@@ -14,7 +14,7 @@ function readFile() {
       input = eval("(" + input + ")");
       console.log(input);
 
-      inputData = input.swipe[0].keypoints[10];
+      inputData = input.swipe[0].keypoints.pose;
       console.log(inputData);
     };
   };
@@ -24,7 +24,6 @@ let slider = document.getElementById("slider");
 slider.addEventListener("input", slideFrame);
 
 let frame = 0;
-
 function slideFrame() {
   frame = slider.value;
   let sliderInput = document.getElementById("sliderInput");

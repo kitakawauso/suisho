@@ -46,8 +46,10 @@ function onResults(results) {
     lineWidth: 2,
   });
   canvasCtx.restore();
-  oneFrame = results.poseLandmarks;
-  console.log(results.poseLandmarks);
+  poseFrame = results.poseLandmarks;
+  leftHandFrame = results.leftHandLandmarks;
+  rightHandFrame = results.rightHandLandmarks;
+  // console.log(results.poseLandmarks);
 }
 
 const holistic = new Holistic({
@@ -71,23 +73,35 @@ function recording2sec() {
   setTimeout(function () {
     recordFlag = false;
   }, 1000);
-  oneSwipe.push(oneFrame);
-  console.log(oneSwipe);
+  poseSwipe.push(poseFrame);
+  leftHandSwipe.push(leftHandFrame);
+  rightHandSwipe.push(rightHandFrame);
+  console.log(poseSwipe);
+  console.log(leftHandSwipe);
+  console.log(rightHandSwipe); // TODO: kokomade
 }
 
 function draw() {
   // Instant execution
   if (recordFlag) {
     recording2sec();
-  } else if (oneSwipe.length) {
+  } else if (
+    poseSwipe.length &&
+    leftHandSwipe.length &&
+    rightHandSwipe.length
+  ) {
     swipeData.position = [row, column];
-    // console.log(oneSwipe);
-    swipeData.keypoints = oneSwipe;
-    // console.log(swipeData);
+    // console.log(poseSwipe);
+    swipeData.keypoints.pose = poseSwipe;
+    swipeData.keypoints.hand.left = leftHandSwipe;
+    swipeData.keypoints.hand.right = rightHandSwipe;
+
     outputData.swipe.push(swipeData);
     console.log(outputData);
 
-    oneSwipe = [];
+    poseSwipe = [];
+    leftHandSwipe = [];
+    rightHandSwipe = [];
   }
 }
 
