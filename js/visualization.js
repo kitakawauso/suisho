@@ -37,6 +37,20 @@ const node = [
   [], //   32: right foot index
 ];
 
+function setup() {
+  let canvas = createCanvas(canvasWidth, canvasHeight, WEBGL);
+  canvas.parent("canvas");
+  angleMode(DEGREES);
+  normalMaterial();
+  // debugMode(); // display grid
+
+  camera(100, -100, 350, 0, 0, 0, 0, 1, 0);
+}
+
+function viewReset() {
+  camera(100, -100, 350, 0, 0, 0, 0, 1, 0);
+}
+
 function drawPlane() {
   push();
   translate(0, -80, -160);
@@ -60,19 +74,6 @@ function drawPlane() {
   stroke(200, 0, 200);
   plane(320, 320); // yz plane
   pop();
-}
-
-function setup() {
-  createCanvas(canvasWidth, canvasHeight, WEBGL);
-  angleMode(DEGREES);
-  normalMaterial();
-  // debugMode(); // display grid
-
-  camera(100, -100, 350, 0, 0, 0, 0, 1, 0);
-}
-
-function viewReset() {
-  camera(100, -100, 350, 0, 0, 0, 0, 1, 0);
 }
 
 function drawStroke(data) {

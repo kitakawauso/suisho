@@ -4,6 +4,7 @@ const outputData = {
     age: 0,
     grade: 0,
     tall: 0,
+    career: 0,
     gender: 0,
     hand: 0,
     style: 0,

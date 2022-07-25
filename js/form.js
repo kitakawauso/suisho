@@ -2,6 +2,7 @@ let nameInput = document.getElementById("nameForm");
 let ageInput = document.getElementById("ageForm");
 let gradeInput = document.getElementById("gradeForm");
 let tallInput = document.getElementById("tallForm");
+let careerInput = document.getElementById("careerForm");
 let genderInput = document.getElementsByName("genderForm");
 let handInput = document.getElementsByName("handForm");
 let styleInput = document.getElementById("styleForm");
@@ -22,6 +23,7 @@ function settingOnClick() {
   outputData.player.age = ageInput.value;
   outputData.player.grade = gradeInput.value;
   outputData.player.tall = tallInput.value;
+  outputData.player.career = careerInput.value;
   outputData.player.gender = radioChecked(genderInput).value;
   outputData.player.hand = radioChecked(handInput).value;
   outputData.player.style = styleInput.value;
