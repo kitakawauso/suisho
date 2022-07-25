@@ -1,0 +1,35 @@
+/* vis container grid layout begin */
+.vis-container {
+  margin: 1%;
+  display: grid;
+  grid-template-rows: 25vh 60vh;
+  grid-template-columns: 20vw 15vw 15vw 15vw 15vw 15vw;
+  /* TODO: Responsive support */
+  grid-template-areas:
+    "control control player1 player1 player2 player2"
+    "canvas  canvas  canvas  graph   graph   graph";
+}
+
+.vis-container>div {
+  padding: 5%;
+}
+
+.control-box {
+  grid-area: control;
+}
+
+.player1-box {
+  grid-area: player1;
+}
+
+.player2-box {
+  grid-area: player2;
+}
+
+.canvas-box {
+  grid-area: canvas;
+}
+
+.graph-box {
+  grid-area: graph;
+}
