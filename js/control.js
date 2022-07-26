@@ -19,7 +19,7 @@ let row = 6;
 
 function cardOnClick(td) {
   if (recordFlag) {
-    writeToConsole("Can't change card during recording2sec.", "msg");
+    writeToConsole("Can't change card during recording1sec.", "msg");
   } else {
     let currentChecked = document.getElementsByClassName("swipeCard");
     currentChecked[0].classList.remove("swipeCard");
