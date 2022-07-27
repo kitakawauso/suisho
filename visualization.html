@@ -44,24 +44,16 @@
     ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
-  <body onload="readFile()">
+  <body>
     <div class="vis-container">
       <div class="control-box">
-        <div class="slider-box element">
+        <div>
           <h2>Animation slider</h2>
-          <input
-            type="range"
-            min="0"
-            max="40"
-            step="1"
-            value="0"
-            class="animation-slider"
-            id="slider"
-          />
-          <div class="output" id="sliderInput">0</div>
+          <input type="range" min="0" max="40" step="1" value="0" id="slider" />
+          <div id="sliderInput">0</div>
         </div>
 
-        <div class="camera-control">
+        <div>
           <button
             class="btn btn--cubic btn--green btn--radius"
             onclick="viewReset()"
@@ -71,30 +63,30 @@
         </div>
       </div>
 
-      <div class="player1-box">
-        <div class="file-box" id="fileform">
-          <h2>JSON File input</h2>
-          <div class="element">
-            <input type="file" id="getFile" accept=".json" />
-          </div>
-        </div>
+      <div class="player0-box">
+        <h2>JSON File input</h2>
+        <input
+          type="file"
+          accept=".json"
+          class="player0"
+          onchange="readFile(this)"
+        />
 
         <h2>Clustering</h2>
-        <div id="clusteringBox"></div>
+        <div class="player0" id="clusteringBox"></div>
       </div>
 
-      <div class="player2-box">
-        <div class="file-box" id="fileform">
-          <h2>JSON File input</h2>
-          <div class="element">
-            <input type="file" id="getFile" accept=".json" />
-          </div>
-        </div>
+      <div class="player1-box">
+        <h2>JSON File input</h2>
+        <input
+          type="file"
+          accept=".json"
+          class="player1"
+          onchange="readFile(this)"
+        />
 
         <h2>Clustering</h2>
-        <div id="clusteringBox">
-          <select id="clusteringList" multiple></select>
-        </div>
+        <div class="player1" id="clusteringBox"></div>
       </div>
 
       <div class="canvas-box" id="canvas"></div>

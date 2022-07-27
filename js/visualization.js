@@ -114,15 +114,17 @@ function draw() {
   drawPlane();
   orbitControl();
 
-  if (clustering.length) {
-    for (var i = 0; i < clustering.length; i++) {
-      if (clustering[i]) {
-        let data = input.swipe.keypoints.pose[i][frame];
-        let color = colorList[i];
-        if (!data) console.log("null");
-        else {
-          drawSphere(data, color);
-          drawStroke(data, color);
+  for (var i = 0; i < 2; i++) {
+    if (input[i]) {
+      for (var j = 0; j < clustering[i].length; j++) {
+        if (clustering[i][j]) {
+          let data = input[i].swipe.keypoints.pose[j][frame];
+          let color = colorList[j];
+          if (!data) console.log("null");
+          else {
+            drawSphere(data, color);
+            drawStroke(data, color);
+          }
         }
       }
     }

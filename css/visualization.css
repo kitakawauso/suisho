@@ -6,7 +6,7 @@
   grid-template-columns: 20vw 15vw 15vw 15vw 15vw 15vw;
   /* TODO: Responsive support */
   grid-template-areas:
-    "control control player1 player1 player2 player2"
+    "control control player0 player0 player1 player1"
     "canvas  canvas  canvas  graph   graph   graph";
 }
 
@@ -18,12 +18,12 @@
   grid-area: control;
 }
 
-.player1-box {
-  grid-area: player1;
+.player0-box {
+  grid-area: player0;
 }
 
-.player2-box {
-  grid-area: player2;
+.player1-box {
+  grid-area: player1;
 }
 
 .canvas-box {

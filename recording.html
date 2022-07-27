@@ -52,7 +52,7 @@
       </div>
 
       <div id="formBox">
-        <h1 class="form-title">Player information</h1>
+        <h1>Player information</h1>
 
         <div class="form-contents">
           <label>名前：</label><tb></tb
@@ -132,7 +132,6 @@
           value="Setting"
           class="btn btn--green btn--radius btn--cubic"
           onclick="settingOnClick();"
-          id="settingButton"
         />
       </div>
 
@@ -140,7 +139,7 @@
         <h1>Swipe position</h1>
         <div id="fieldWrapper">
           <div id="fieldTable">
-            <table id="cardTable">
+            <table>
               <tr>
                 <td onclick="cardOnClick(this);"></td>
                 <td onclick="cardOnClick(this);"></td>
@@ -258,7 +257,7 @@
       </div>
 
       <div id="controlBox">
-        <div id="repeatCounter">
+        <div>
           <h1>Repeat</h1>
           <button
             class="btn btn--green btn--cubic btn--radius"
@@ -288,9 +287,9 @@
         <div class="state-box"><h1 id="stateLog"></h1></div>
         <div class="msg-box"><p id="consoleLog"></p></div>
 
-        <div id="consoleBtn">
+        <div>
           <button
-            name="saveBtn"
+            id="saveBtn"
             class="btn btn--cubic btn--green btn--radius"
             onclick="saveOnClick()"
             disabled
@@ -299,7 +298,6 @@
           </button>
           <a
             href="./visualization.html"
-            name="visBtn"
             class="btn btn--cubic btn--green btn--radius"
           >
             visualization
