@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  accent-color: #B6C197;
+  /* background: transparent; */
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+}
+
+
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.btn {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.5;
+  position: relative;
+  display: inline-block;
+  padding: 1rem 4rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  color: #212529;
+  border-radius: 0.5rem;
+}
+
+.btn--green {
+  background: #B6C197;
+}
+
+.btn--green.btn--cubic {
+  border-bottom: 5px solid #8A9B68;
+}
+
+.btn--green.btn--cubic:hover {
+  margin-top: 3px;
+  border-bottom: 2px solid #8A9B68;
+}
+
+.btn--radius {
+  border-radius: 100vh;
+}
+
+.btn:disabled {
+  background: #aaa;
+  border-bottom: 0;
+  cursor: default;
+}
+
+.btn:disabled:hover {
+  margin-top: 0;
+  border-bottom: 0;
+}

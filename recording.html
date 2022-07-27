@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="./css/common.css"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+    <link
+      href="./css/recording.css"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+
+    <!-- TODO: Responsive support -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.js"></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="record-container">
+      <div id="videoBox">
+        <video class="input-video" width="1280px" height="720px"></video>
+        <canvas class="output-canvas" width="1280px" height="720px"></canvas>
+      </div>
+
+      <div id="formBox">
+        <h1 class="form-title">Player information</h1>
+
+        <div class="form-contents">
+          <label>名前：</label><tb></tb
+          ><input
+            type="text"
+            id="nameForm"
+            class="text-box"
+            placeholder="キタガワリサ"
+          /><br />
+
+          <label for="ageForm">年齢：</label
+          ><input
+            type="text"
+            id="ageForm"
+            class="text-box"
+            placeholder="22"
+          /><br />
+
+          <label for="gradeForm">段位：</label
+          ><input
+            name="number"
+            id="gradeForm"
+            class="text-box"
+            placeholder="4"
+          /><br />
+
+          <label for="tallForm">身長：</label
+          ><input
+            type="text"
+            id="tallForm"
+            class="text-box"
+            placeholder="160"
+          /><br />
+
+          <label>かるた歴：</label>
+          <select id="careerForm">
+            <option value="0">未経験</option>
+            <option value="1">半年未満</option>
+            <option value="2">1年未満</option>
+            <option value="3">2年未満</option>
+            <option value="4" selected>3年未満</option>
+            <option value="5">5年未満</option>
+            <option value="6">10年未満</option>
+            <option value="7">10年以上</option>
+          </select>
+          <br />
+
+          <label>性別：</label
+          ><input type="radio" name="genderForm" value="0" checked /><label
+            for="man"
+            >男</label
+          >
+          <input type="radio" name="genderForm" value="1" /><label for="woman"
+            >女</label
+          ><br />
+
+          <label>利き手：</label
+          ><input type="radio" name="handForm" value="0" checked /><label
+            for="right"
+            >右手</label
+          >
+          <input type="radio" name="handForm" value="1" /><label for="left"
+            >左手</label
+          ><br />
+
+          <label>守り</label>
+          <input type="range" id="styleForm" step="10" value="50" />
+          <label>攻め</label><br />
+
+          <label>痩せ型</label>
+          <input type="range" id="bodyForm" step="10" value="50" />
+          <label>筋肉質</label><br />
+        </div>
+
+        <input
+          type="submit"
+          value="Setting"
+          class="btn btn--green btn--radius btn--cubic"
+          onclick="settingOnClick();"
+          id="settingButton"
+        />
+      </div>
+
+      <div id="fieldBox">
+        <h1>Swipe position</h1>
+        <div id="fieldWrapper">
+          <div id="fieldTable">
+            <table id="cardTable">
+              <tr>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+              </tr>
+              <tr>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+              </tr>
+              <tr>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+              </tr>
+              <tr>
+                <th colspan="16"></th>
+              </tr>
+              <tr>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+              </tr>
+              <tr>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+              </tr>
+              <tr>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td class="emptyCard"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);"></td>
+                <td onclick="cardOnClick(this);" class="swipeCard"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="controlBox">
+        <div id="repeatCounter">
+          <h1>Repeat</h1>
+          <button
+            class="btn btn--green btn--cubic btn--radius"
+            id="down"
+            onclick="downRepeat()"
+          >
+            －
+          </button>
+          <input type="text" value="1" class="counter-text" id="counterText" />
+          <button
+            class="btn btn--green btn--cubic btn--radius"
+            id="up"
+            onclick="upRepeat()"
+          >
+            ＋
+          </button>
+        </div>
+        <audio
+          src="./chant.mp3"
+          class="chant"
+          onplay="chanting();"
+          controls
+        ></audio>
+      </div>
+
+      <div id="consoleBox">
+        <div class="state-box"><h1 id="stateLog"></h1></div>
+        <div class="msg-box"><p id="consoleLog"></p></div>
+
+        <div id="consoleBtn">
+          <button
+            name="saveBtn"
+            class="btn btn--cubic btn--green btn--radius"
+            onclick="saveOnClick()"
+            disabled
+          >
+            save
+          </button>
+          <a
+            href="./visualization.html"
+            name="visBtn"
+            class="btn btn--cubic btn--green btn--radius"
+          >
+            visualization
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/json.js"></script>
+    <script src="./js/control.js"></script>
+    <script src="./js/form.js"></script>
+    <script src="./js/recording.js"></script>
+  </body>
+</html>
