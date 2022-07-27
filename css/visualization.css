@@ -1,33 +1,35 @@
 /* vis container grid layout begin */
 .vis-container {
-  margin: 1%;
   display: grid;
   grid-template-rows: 30vh 60vh;
-  grid-template-columns: 20vw 15vw 15vw 15vw 15vw 15vw;
+  grid-template-columns: 40vw 25vw 25vw;
   /* TODO: Responsive support */
   grid-template-areas:
-    "control control player0 player0 player1 player1"
-    "canvas  canvas  canvas  graph   graph   graph";
-}
-
-.vis-container>div {
-  padding: 5%;
+    "control player0 player1"
+    "canvas  graph   graph";
 }
 
 .control-box {
+  padding: 5%;
   grid-area: control;
 }
 
 .player0-box {
+  padding: 5%;
   grid-area: player0;
 }
 
 .player1-box {
+  padding: 5%;
   grid-area: player1;
 }
 
 .canvas-box {
+  margin: 5%;
+  border: 1px solid #333;
   grid-area: canvas;
+  /* resize: both; */
+  overflow: hidden;
 }
 
 .graph-box {
@@ -36,4 +38,9 @@
 
 #clusteringBox > label {
   padding: 0 2% 0 0;
+}
+
+.canvas-box > canvas {
+  width: 100%;
+  height: 100%;
 }
