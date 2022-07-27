@@ -94,7 +94,7 @@ function drawStroke(data, color) {
 }
 
 function drawSphere(data, color) {
-  for (var i = 0; i < data.length; i++) {
+  for (var i = 0; i < 33; i++) {
     // console.log(data[i]);
     let x = data[i].x * 300 - 200;
     let y = data[i].y * 300 - 250;
@@ -117,10 +117,13 @@ function draw() {
   if (clustering.length) {
     for (var i = 0; i < clustering.length; i++) {
       if (clustering[i]) {
-        let data = input.swipe[i].keypoints.pose[frame];
+        let data = input.swipe.keypoints.pose[i][frame];
         let color = colorList[i];
-        drawSphere(data, color);
-        drawStroke(data, color);
+        if (!data) console.log("null");
+        else {
+          drawSphere(data, color);
+          drawStroke(data, color);
+        }
       }
     }
   }

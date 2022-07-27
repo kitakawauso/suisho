@@ -2,7 +2,7 @@
 .vis-container {
   margin: 1%;
   display: grid;
-  grid-template-rows: 25vh 60vh;
+  grid-template-rows: 30vh 60vh;
   grid-template-columns: 20vw 15vw 15vw 15vw 15vw 15vw;
   /* TODO: Responsive support */
   grid-template-areas:
@@ -32,4 +32,8 @@
 
 .graph-box {
   grid-area: graph;
+}
+
+#clusteringBox > label {
+  padding: 0 2% 0 0;
 }

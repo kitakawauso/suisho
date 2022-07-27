@@ -46,10 +46,14 @@ function onResults(results) {
     lineWidth: 2,
   });
   canvasCtx.restore();
-  poseFrame = results.poseLandmarks;
-  leftHandFrame = results.leftHandLandmarks;
-  rightHandFrame = results.rightHandLandmarks;
-  // console.log(results.poseLandmarks);
+
+  if (recordState == "recording") {
+    poseSwipe.push(results.poseLandmarks);
+    leftHandSwipe.push(results.leftHandLandmarks);
+    rightHandSwipe.push(results.rightHandLandmarks);
+    console.log("poseSwipe = ");
+    console.log(poseSwipe);
+  }
 }
 
 const holistic = new Holistic({
@@ -69,39 +73,30 @@ holistic.setOptions({
 
 holistic.onResults(onResults);
 
-function recording2sec() {
-  setTimeout(function () {
-    recordFlag = false;
-  }, 1000);
-  poseSwipe.push(poseFrame);
-  leftHandSwipe.push(leftHandFrame);
-  rightHandSwipe.push(rightHandFrame);
-  console.log(poseSwipe);
-  console.log(leftHandSwipe);
-  console.log(rightHandSwipe);
-}
-
-function draw() {
-  // Instant execution
-  if (recordFlag) {
-    recording2sec();
-  } else if (
-    poseSwipe.length &&
-    leftHandSwipe.length &&
-    rightHandSwipe.length
-  ) {
+function recording(count) {
+  console.log(count);
+  console.log(recordState);
+  if (recordState == "recorded") {
     swipeData.position = [row, column];
 
-    swipeData.keypoints.pose = poseSwipe;
-    swipeData.keypoints.hand.left = leftHandSwipe;
-    swipeData.keypoints.hand.right = rightHandSwipe;
+    swipeData.keypoints.pose.push(poseSwipe);
+    swipeData.keypoints.hand.left.push(leftHandSwipe);
+    swipeData.keypoints.hand.right.push(rightHandSwipe);
 
-    outputData.swipe.push(swipeData);
-    console.log(outputData);
+    console.log("swipeData = ");
+    console.log(swipeData);
 
     poseSwipe = [];
     leftHandSwipe = [];
     rightHandSwipe = [];
+
+    if (count >= maxRepeat) {
+      outputData.swipe = swipeData;
+      console.log("outputData = ");
+      console.log(outputData);
+    }
+
+    recordState = "waiting";
   }
 }
 
@@ -127,7 +122,7 @@ function convertTimeToMS(currentTime) {
   return res;
 }
 
-const startTime = "0:08"; // recoding time
+const startTime = "0:07"; // recoding time
 
 function chanting() {
   writeToConsole("Please prepare to swipe.", "msg");
@@ -141,17 +136,20 @@ function chanting() {
     function () {
       let time = convertTimeToMS(chant.currentTime);
 
-      if (time == startTime && !recordFlag) {
-        recordFlag = true;
+      if (time == startTime && recordState == "waiting") {
+        recordState = "recording";
         count++;
+        setTimeout(function () {
+          recordState = "recorded";
+
+          if (count >= maxRepeat) {
+            chant.loop = false;
+            saveBtn.disabled = false;
+          }
+        }, 2000);
       }
 
-      if (count >= maxRepeat) {
-        chant.loop = false;
-        count = 0;
-        saveBtn.disabled = false;
-        visBtn.disabled = false;
-      }
+      recording(count);
     },
     false
   );

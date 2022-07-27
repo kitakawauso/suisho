@@ -37,7 +37,7 @@ function makeClusteringBox() {
     clusteringBox.removeChild(clusteringBox.firstChild);
   }
 
-  for (var i = 0; i < input.swipe.length; i++) {
+  for (var i = 0; i < input.swipe.keypoints.pose.length; i++) {
     clustering.push(1);
 
     var element = document.createElement("input");
@@ -51,11 +51,8 @@ function makeClusteringBox() {
     label.htmlFor = "cluster" + i;
     label.appendChild(document.createTextNode(i));
 
-    var br = document.createElement("br");
-
     clusteringBox.appendChild(element);
     clusteringBox.appendChild(label);
-    clusteringBox.appendChild(br);
   }
 }
 

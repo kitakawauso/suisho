@@ -11,14 +11,14 @@ function writeToConsole(msg, type) {
 // console log begin
 
 // card position set begin
-let recordFlag = false;
+let recordState = "waiting";
 
 let column = 15;
 let tr;
 let row = 6;
 
 function cardOnClick(td) {
-  if (recordFlag) {
+  if (recordState == "recording") {
     writeToConsole("Can't change card during recording1sec.", "msg");
   } else {
     let currentChecked = document.getElementsByClassName("swipeCard");
