@@ -1,140 +1,13 @@
-// json for output setting begin
-const outputData = {
-  player: {
-    name: "unknown",
-    age: 0,
-    grade: 0,
-    tall: 0,
-    gender: 0,
-    hand: 0,
-    style: 0,
-    body: 0,
-  },
-  swipe: [],
-};
-
-const swipeData = {
-  position: [6, 15], // default 自陣右下段
-  keypoints: [],
-};
-
-let oneSwipe = [];
-let oneFrame = [];
-
-// data structure
-// outputData -> swipe -> oneSwipe -> oneFrame
-
-// form input begin
-let nameInput = document.getElementById("nameForm");
-let ageInput = document.getElementById("ageForm");
-let gradeInput = document.getElementById("gradeForm");
-let tallInput = document.getElementById("tallForm");
-let genderInput = document.getElementsByName("genderForm");
-let handInput = document.getElementsByName("handForm");
-let styleInput = document.getElementById("styleForm");
-let bodyInput = document.getElementById("bodyForm");
-
-function radioChecked(formInput) {
-  let ans;
-  for (let i = 0; i < formInput.length; i++) {
-    if (formInput.item(i).checked) {
-      ans = formInput.item(i);
-    }
-  }
-  return ans;
-}
-
-const formPage = document.getElementById("formPage");
-const recordPage = document.getElementById("recordPage");
-
-recordPage.style.display = "none";
-
-function settingOnClick() {
-  outputData.player.name = nameInput.value;
-  outputData.player.age = ageInput.value;
-  outputData.player.grade = gradeInput.value;
-  outputData.player.tall = tallInput.value;
-  outputData.player.gender = radioChecked(genderInput).value;
-  outputData.player.hand = radioChecked(handInput).value;
-  outputData.player.style = styleInput.value;
-  outputData.player.body = bodyInput.value;
-  console.log(outputData.player);
-
-  formPage.style.display = "none";
-  recordPage.style.display = "block";
-  camera.start();
-  writeToConsole("Please set card position.", "state");
-}
-// form input end
-
-// console begin
-const consoleLog = document.getElementById("consoleLog");
-const stateLog = document.getElementById("stateLog");
-function writeToConsole(msg, type) {
-  if (type == "msg") {
-    consoleLog.innerHTML += msg + "<br>";
-  } else if (type == "state") {
-    stateLog.innerHTML = msg;
-  }
-}
-
-// console end
-
-// card position set begin
-let column = 15;
-let tr;
-let row = 6;
-
-function cardOnClick(td) {
-  if (recordFlag) {
-    console.log("Can't change card during recording2sec.");
-  } else {
-    let currentChecked = document.getElementsByClassName("swipeCard");
-    currentChecked[0].classList.remove("swipeCard");
-
-    column = td.cellIndex;
-    tr = td.parentNode;
-    row = tr.sectionRowIndex;
-
-    td.classList.add("swipeCard");
-    writeToConsole("card position is " + row + " " + column + ".", "msg");
-    writeToConsole("Please set repeat counter.", "state");
-  }
-}
-// card position set end
-
-// counter begin
-const counterText = document.getElementById("counterText");
-let maxRepeat = 1;
-
-function downRepeat() {
-  if (counterText.value > 1) {
-    counterText.value--;
-  }
-  maxRepeat = counterText.value;
-  // writeToConsole("repeat counter is " + maxRepeat + ".", "msg");
-  writeToConsole("Let's start recording.", "state");
-}
-
-function upRepeat() {
-  counterText.value++;
-  maxRepeat = counterText.value;
-  // writeToConsole("repeat counter is " + maxRepeat + ".", "msg");
-  writeToConsole("Let's start recording.", "state");
-}
-// counter end
-
-// record page begin
 // base setting begin
 const inputVideo = document.getElementsByClassName("input-video")[0];
 const outputCanvas = document.getElementsByClassName("output-canvas")[0];
 const canvasCtx = outputCanvas.getContext("2d");
 const chant = document.getElementsByClassName("chant")[0];
+const saveBtn = document.getElementsByName("saveBtn")[0];
+const visBtn = document.getElementsByName("visBtn")[0];
 
 inputVideo.style.display = "none";
 // base setting end
-
-// json for output setting end
 
 function onResults(results) {
   canvasCtx.save();
@@ -173,7 +46,14 @@ function onResults(results) {
     lineWidth: 2,
   });
   canvasCtx.restore();
-  oneFrame = results.poseLandmarks;
+
+  if (recordState == "recording") {
+    poseSwipe.push(results.poseLandmarks);
+    leftHandSwipe.push(results.leftHandLandmarks);
+    rightHandSwipe.push(results.rightHandLandmarks);
+    console.log("poseSwipe = ");
+    console.log(poseSwipe);
+  }
 }
 
 const holistic = new Holistic({
@@ -193,30 +73,30 @@ holistic.setOptions({
 
 holistic.onResults(onResults);
 
-function recording2sec() {
-  setTimeout(function () {
-    recordFlag = false;
-  }, 1000);
-  oneSwipe.push(oneFrame);
-  console.log(oneSwipe);
-}
-
-let recordFlag = false;
-
-function draw() {
-  // Instant execution
-  if (recordFlag) {
-    recording2sec();
-  } else if (oneSwipe.length) {
+function recording(count) {
+  console.log(count);
+  console.log(recordState);
+  if (recordState == "recorded") {
     swipeData.position = [row, column];
-    // console.log(oneSwipe);
-    swipeData.keypoints = oneSwipe;
-    // console.log(swipeData);
-    outputData.swipe.push(swipeData);
-    console.log(outputData);
-    writeToConsole(outputData, "msg");
 
-    oneSwipe = [];
+    swipeData.keypoints.pose.push(poseSwipe);
+    swipeData.keypoints.hand.left.push(leftHandSwipe);
+    swipeData.keypoints.hand.right.push(rightHandSwipe);
+
+    console.log("swipeData = ");
+    console.log(swipeData);
+
+    poseSwipe = [];
+    leftHandSwipe = [];
+    rightHandSwipe = [];
+
+    if (count >= maxRepeat) {
+      outputData.swipe = swipeData;
+      console.log("outputData = ");
+      console.log(outputData);
+    }
+
+    recordState = "waiting";
   }
 }
 
@@ -242,7 +122,7 @@ function convertTimeToMS(currentTime) {
   return res;
 }
 
-const startTime = "0:08"; // recoding time
+const startTime = "0:07"; // recoding time
 
 function chanting() {
   writeToConsole("Please prepare to swipe.", "msg");
@@ -256,15 +136,20 @@ function chanting() {
     function () {
       let time = convertTimeToMS(chant.currentTime);
 
-      if (time == startTime && !recordFlag) {
-        recordFlag = true;
+      if (time == startTime && recordState == "waiting") {
+        recordState = "recording";
         count++;
+        setTimeout(function () {
+          recordState = "recorded";
+
+          if (count >= maxRepeat) {
+            chant.loop = false;
+            saveBtn.disabled = false;
+          }
+        }, 2000);
       }
 
-      if (count >= maxRepeat) {
-        chant.loop = false;
-        count = 0;
-      }
+      recording(count);
     },
     false
   );
@@ -278,4 +163,15 @@ const camera = new Camera(inputVideo, {
   height: 720,
 });
 
-// record page end
+function saveOnClick() {
+  // saveボタンクリックでjsonファイルを保存
+  console.log(outputData);
+  let json_data = JSON.stringify(outputData);
+  let blob = new Blob([json_data], {
+    type: "text/plan",
+  });
+  let link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = outputData.player.name + ".json";
+  link.click();
+}
