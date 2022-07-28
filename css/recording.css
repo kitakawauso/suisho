@@ -1,8 +1,7 @@
 /* record container grid layout begin */
 .record-container {
-  margin: 1%;
   display: grid;
-    grid-template-rows: 60vh 20vh;
+    grid-template-rows: 55vh 20vh;
     grid-template-columns: 30vw 30vw 35vw;
     /* TODO: Responsive support */
     grid-template-areas:
@@ -41,7 +40,8 @@
 /* record container grid layout end */
 
 .output-canvas {
-  height: 100%;
+  margin: 2%;
+  height: 90%;
 }
 
 /* form begin */
@@ -117,6 +117,7 @@ table td:hover {
 /* field end */
 
 /* control begin */
+
 .counter-text {
   width: 80px;
   line-height: 3rem;

@@ -3,8 +3,7 @@ const inputVideo = document.getElementsByClassName("input-video")[0];
 const outputCanvas = document.getElementsByClassName("output-canvas")[0];
 const canvasCtx = outputCanvas.getContext("2d");
 const chant = document.getElementsByClassName("chant")[0];
-const saveBtn = document.getElementsByName("saveBtn")[0];
-const visBtn = document.getElementsByName("visBtn")[0];
+const saveBtn = document.getElementById("saveBtn");
 
 inputVideo.style.display = "none";
 // base setting end
@@ -147,6 +146,7 @@ function chanting() {
             saveBtn.disabled = false;
           }
         }, 2000);
+        // TODO: change to 3000;
       }
 
       recording(count);

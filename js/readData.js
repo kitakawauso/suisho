@@ -1,24 +1,84 @@
-let input = 0;
-let clustering = [];
+const graphPartsBox1 = document.getElementById("graphPartsBox1");
+const graphPartsBox2 = document.getElementById("graphPartsBox2");
 
-function readFile() {
-  var file = document.querySelector("#getFile");
+let playerNum = 0;
+let input = [[], []];
+let clustering = [[], []];
+let playerColors = [];
+let part = [14, 14];
 
-  file.onchange = function () {
-    var fileList = file.files;
-    var reader = new FileReader();
+function readFile(file) {
+  var fileList = file.files;
+  var reader = new FileReader();
 
-    reader.readAsText(fileList[0]);
+  reader.readAsText(fileList[0]);
 
-    reader.onload = function () {
-      input = reader.result.replace(/[\n\r]/g, "");
-      input = eval("(" + input + ")");
-      console.log(input);
+  reader.onload = function () {
+    var tmp = file.className;
+    if (tmp == "player1") playerNum = 0;
+    else if (tmp == "player2") playerNum = 1;
 
-      clustering = [];
-      makeClusteringBox();
-    };
+    var buf;
+    buf = reader.result.replace(/[\n\r]/g, "");
+    input[playerNum] = eval("(" + buf + ")");
+    console.log(input);
+
+    var nextNext = file.nextElementSibling.nextElementSibling;
+    makeClusteringBox(nextNext);
+
+    var length0 = clustering[0].length;
+    var length1 = clustering[1].length;
+    playerColors = createColorList(length0, length1);
+    console.log(playerColors);
+
+    pushChartData(input, clustering, part);
   };
+}
+
+function makeClusteringBox(nextNext) {
+  var clusteringBox = nextNext;
+  while (clusteringBox.firstChild) {
+    clusteringBox.removeChild(clusteringBox.firstChild);
+  }
+
+  clustering[playerNum] = [];
+
+  for (var i = 0; i < input[playerNum].swipe.keypoints.pose.length; i++) {
+    clustering[playerNum].push(1);
+
+    var element = document.createElement("input");
+    element.type = "checkbox";
+    element.id = "cluster" + i;
+    element.value = i;
+    element.checked = true;
+    element.addEventListener("change", clusterChange);
+
+    var label = document.createElement("label");
+    label.appendChild(element);
+    label.appendChild(document.createTextNode(i));
+
+    clusteringBox.appendChild(label);
+  }
+
+  if (!playerNum) graphPartsBox1.hidden = false;
+  else if (playerNum) graphPartsBox2.hidden = false;
+}
+
+function clusterChange() {
+  var p = 0;
+  var tmp = this.parentElement.parentElement.className;
+  if (tmp == "player1") p = 0;
+  else if (tmp == "player2") p = 1;
+
+  var v = this.value;
+
+  if (this.checked) {
+    clustering[p][v] = 1;
+  } else {
+    clustering[p][v] = 0;
+  }
+  // console.log(clustering);
+  pushChartData(input, clustering, part);
 }
 
 let slider = document.getElementById("slider");
@@ -31,37 +91,11 @@ function slideFrame() {
   sliderInput.innerHTML = slider.value;
 }
 
-let clusteringBox = document.getElementById("clusteringBox");
-function makeClusteringBox() {
-  while (clusteringBox.firstChild) {
-    clusteringBox.removeChild(clusteringBox.firstChild);
-  }
+function partsChange(select) {
+  var tmp = select.className;
+  if (tmp == "player1") p = 0;
+  else if (tmp == "player2") p = 1;
 
-  for (var i = 0; i < input.swipe.keypoints.pose.length; i++) {
-    clustering.push(1);
-
-    var element = document.createElement("input");
-    element.type = "checkbox";
-    element.id = "cluster" + i;
-    element.value = i;
-    element.checked = true;
-    element.addEventListener("change", clusterChange);
-
-    var label = document.createElement("label");
-    label.htmlFor = "cluster" + i;
-    label.appendChild(document.createTextNode(i));
-
-    clusteringBox.appendChild(element);
-    clusteringBox.appendChild(label);
-  }
-}
-
-function clusterChange() {
-  var v = this.value;
-  if (this.checked) {
-    clustering[v] = 1;
-  } else {
-    clustering[v] = 0;
-  }
-  // console.log(clustering);
+  part[p] = select.value;
+  pushChartData(input, clustering, part);
 }
