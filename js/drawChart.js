@@ -79,15 +79,22 @@ function drawChart(dataset) {
             // suggestedMin: 0,
             suggestedMax: 1,
             ticks: {
-              stepSize: 0.2,
+              stepSize: 0.1,
             },
           },
         },
         plugins: {
+          legend: {
+            position: "bottom",
+            labels: {
+              boxWidth: 50,
+            },
+          },
+
           zoom: {
             pan: {
               enabled: true,
-              mode: "x",
+              mode: "y",
             },
             limits: {
               y: { min: 0, max: 1 },
@@ -99,7 +106,7 @@ function drawChart(dataset) {
               pinch: {
                 enabled: true,
               },
-              mode: "xy",
+              mode: "y",
             },
           },
         },
