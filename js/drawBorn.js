@@ -35,7 +35,7 @@ const node = [
 ];
 
 function setup() {
-  let bornCanvas = createCanvas(windowWidth / 2, windowHeight / 2, WEBGL);
+  let bornCanvas = createCanvas(windowWidth / 3, windowHeight / 2, WEBGL);
   bornCanvas.parent("bornCanvas");
   angleMode(DEGREES);
   normalMaterial();
@@ -45,7 +45,7 @@ function setup() {
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth / 2, windowHeight / 2);
+  resizeCanvas(windowWidth / 3, windowHeight / 2);
 }
 
 function viewReset() {
@@ -94,19 +94,31 @@ function drawStroke(data, color) {
   }
 }
 
-function drawSphere(data, color) {
-  for (var i = 0; i < 33; i++) {
-    // console.log(data[i]);
-    let x = data[i].x * 300 - 200;
-    let y = data[i].y * 300 - 100;
-    let z = -data[i].z * 200;
+function drawSphere(data, color, type) {
+  var max;
+  var adjust = 0;
 
-    push();
-    translate(x, y, z);
-    fill(color[0], color[1], color[2]);
-    stroke(color[0], color[1], color[2]);
-    sphere(1);
-    pop();
+  if (type == "pose") {
+    max = 33;
+  } else if (type == "hand") {
+    max = 21;
+    adjust = 100;
+  }
+
+  for (var i = 0; i < max; i++) {
+    let x, y, z;
+    if (data != null) {
+      x = data[i].x * 300 - 200;
+      y = data[i].y * 300 - 100;
+      z = -data[i].z * 200 + adjust;
+
+      push();
+      translate(x, y, z);
+      fill(color[0], color[1], color[2]);
+      stroke(color[0], color[1], color[2]);
+      sphere(1);
+      pop();
+    }
   }
 }
 
@@ -119,12 +131,16 @@ function draw() {
     if (input[i]) {
       for (var j = 0; j < clustering[i].length; j++) {
         if (clustering[i][j]) {
-          let data = input[i].swipe.keypoints.pose[j][frame];
+          let poseData = input[i].swipe.keypoints.pose[j][frame];
+          let handData = input[i].swipe.keypoints.hand;
+
           let color = playerColors[i][j];
-          if (!data) console.log("null");
-          else {
-            drawSphere(data, color);
-            drawStroke(data, color);
+          if (poseData && handData) {
+            drawSphere(poseData, color, "pose");
+            drawStroke(poseData, color);
+
+            drawSphere(handData.left[j][frame], color, "hand");
+            drawSphere(handData.right[j][frame], color, "hand");
           }
         }
       }

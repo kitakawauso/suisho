@@ -5,7 +5,7 @@
   grid-template-columns: 40vw 25vw 25vw;
   /* TODO: Responsive support */
   grid-template-areas:
-    "control player0 player1"
+    "control player1 player2"
     "born    graph   graph";
 }
 
@@ -14,14 +14,14 @@
   grid-area: control;
 }
 
-.player0-box {
-  padding: 5%;
-  grid-area: player0;
-}
-
 .player1-box {
   padding: 5%;
   grid-area: player1;
+}
+
+.player2-box {
+  padding: 5%;
+  grid-area: player2;
 }
 
 .canvas-box {
@@ -33,6 +33,7 @@
 }
 
 .graph-box {
+  margin: 5%;
   grid-area: graph;
 }
 

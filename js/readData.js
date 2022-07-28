@@ -1,7 +1,11 @@
+const graphPartsBox1 = document.getElementById("graphPartsBox1");
+const graphPartsBox2 = document.getElementById("graphPartsBox2");
+
 let playerNum = 0;
 let input = [[], []];
 let clustering = [[], []];
 let playerColors = [];
+let part = [14, 14];
 
 function readFile(file) {
   var fileList = file.files;
@@ -11,8 +15,8 @@ function readFile(file) {
 
   reader.onload = function () {
     var tmp = file.className;
-    if (tmp == "player0") playerNum = 0;
-    else if (tmp == "player1") playerNum = 1;
+    if (tmp == "player1") playerNum = 0;
+    else if (tmp == "player2") playerNum = 1;
 
     var buf;
     buf = reader.result.replace(/[\n\r]/g, "");
@@ -27,7 +31,7 @@ function readFile(file) {
     playerColors = createColorList(length0, length1);
     console.log(playerColors);
 
-    pushChartData(input, clustering);
+    pushChartData(input, clustering, part);
   };
 }
 
@@ -55,13 +59,16 @@ function makeClusteringBox(nextNext) {
 
     clusteringBox.appendChild(label);
   }
+
+  if (!playerNum) graphPartsBox1.hidden = false;
+  else if (playerNum) graphPartsBox2.hidden = false;
 }
 
 function clusterChange() {
   var p = 0;
   var tmp = this.parentElement.parentElement.className;
-  if (tmp == "player0") p = 0;
-  else if (tmp == "player1") p = 1;
+  if (tmp == "player1") p = 0;
+  else if (tmp == "player2") p = 1;
 
   var v = this.value;
 
@@ -71,7 +78,7 @@ function clusterChange() {
     clustering[p][v] = 0;
   }
   // console.log(clustering);
-  pushChartData(input, clustering);
+  pushChartData(input, clustering, part);
 }
 
 let slider = document.getElementById("slider");
@@ -82,4 +89,13 @@ function slideFrame() {
   frame = slider.value;
   let sliderInput = document.getElementById("sliderInput");
   sliderInput.innerHTML = slider.value;
+}
+
+function partsChange(select) {
+  var tmp = select.className;
+  if (tmp == "player1") p = 0;
+  else if (tmp == "player2") p = 1;
+
+  part[p] = select.value;
+  pushChartData(input, clustering, part);
 }

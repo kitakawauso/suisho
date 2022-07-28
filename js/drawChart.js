@@ -7,13 +7,15 @@ for (var i = 0; i < 40; i++) {
   xLabel.push(i);
 }
 
-function pushChartData(inputData, clusteringList) {
+function pushChartData(inputData, clusteringList, partList) {
   var dataset = [];
 
   for (var i = 0; i < 2; i++) {
+    var part = partList[i];
     for (var j = 0; j < clusteringList[i].length; j++) {
       var playerI = i + 1;
-      var label = "" + playerI + "-" + j;
+      var playerJ = j + 1;
+      var label = "" + playerI + "-" + playerJ;
       var chartData = {
         label: label,
         data: [],
@@ -32,8 +34,8 @@ function pushChartData(inputData, clusteringList) {
 
           for (var l = 0; l < tmp.length; l++) {
             var d = 0;
-            if (!tmp[l]) d = 0;
-            else d = tmp[l][14].x;
+            if (!tmp[l]) d = null;
+            else d = tmp[l][part].x;
             buf.push(d);
           }
           chartData.data = buf;
@@ -71,6 +73,35 @@ function drawChart(dataset) {
       options: {
         animation: {
           duration: 0, // no animation
+        },
+        scales: {
+          y: {
+            // suggestedMin: 0,
+            suggestedMax: 1,
+            ticks: {
+              stepSize: 0.2,
+            },
+          },
+        },
+        plugins: {
+          zoom: {
+            pan: {
+              enabled: true,
+              mode: "x",
+            },
+            limits: {
+              y: { min: 0, max: 1 },
+            },
+            zoom: {
+              wheel: {
+                enabled: true,
+              },
+              pinch: {
+                enabled: true,
+              },
+              mode: "xy",
+            },
+          },
         },
       },
     });
