@@ -35,13 +35,13 @@ const node = [
 ];
 
 function setup() {
-  let canvas = createCanvas(windowWidth / 2, windowHeight / 2, WEBGL);
-  canvas.parent("canvas");
+  let bornCanvas = createCanvas(windowWidth / 2, windowHeight / 2, WEBGL);
+  bornCanvas.parent("bornCanvas");
   angleMode(DEGREES);
   normalMaterial();
   // debugMode(); // display grid
 
-  camera(300, -100, 330, 100, 50, 0, 0, 1, 0);
+  camera(300, 0, 200, 50, 100, -20, 0, 1, 0);
 }
 
 function windowResized() {
@@ -120,7 +120,7 @@ function draw() {
       for (var j = 0; j < clustering[i].length; j++) {
         if (clustering[i][j]) {
           let data = input[i].swipe.keypoints.pose[j][frame];
-          let color = colorList[j];
+          let color = playerColors[i][j];
           if (!data) console.log("null");
           else {
             drawSphere(data, color);

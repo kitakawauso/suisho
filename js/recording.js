@@ -146,6 +146,7 @@ function chanting() {
             saveBtn.disabled = false;
           }
         }, 2000);
+        // TODO: change to 3000;
       }
 
       recording(count);

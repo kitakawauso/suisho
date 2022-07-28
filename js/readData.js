@@ -1,6 +1,7 @@
 let playerNum = 0;
 let input = [[], []];
 let clustering = [[], []];
+let playerColors = [];
 
 function readFile(file) {
   var fileList = file.files;
@@ -20,6 +21,13 @@ function readFile(file) {
 
     var nextNext = file.nextElementSibling.nextElementSibling;
     makeClusteringBox(nextNext);
+
+    var length0 = clustering[0].length;
+    var length1 = clustering[1].length;
+    playerColors = createColorList(length0, length1);
+    console.log(playerColors);
+
+    pushChartData(input, clustering);
   };
 }
 
@@ -63,6 +71,7 @@ function clusterChange() {
     clustering[p][v] = 0;
   }
   // console.log(clustering);
+  pushChartData(input, clustering);
 }
 
 let slider = document.getElementById("slider");
