@@ -5,7 +5,7 @@
   grid-template-columns: 40vw 25vw 25vw;
   /* TODO: Responsive support */
   grid-template-areas:
-    "control player1 player2"
+    "control player0 player1"
     "born    graph   graph";
 }
 
@@ -14,14 +14,14 @@
   grid-area: control;
 }
 
+.player0-box {
+  padding: 5%;
+  grid-area: player0;
+}
+
 .player1-box {
   padding: 5%;
   grid-area: player1;
-}
-
-.player2-box {
-  padding: 5%;
-  grid-area: player2;
 }
 
 .canvas-box {
@@ -37,7 +37,11 @@
   grid-area: graph;
 }
 
-#clusteringBox > label {
+#clusteringBox0 > label {
+  padding: 0 2% 0 0;
+}
+
+#clusteringBox1 > label {
   padding: 0 2% 0 0;
 }
 

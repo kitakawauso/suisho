@@ -48,7 +48,7 @@ function windowResized() {
   resizeCanvas(windowWidth / 3, windowHeight / 2);
 }
 
-function viewReset() {
+function bornReset() {
   camera(300, 0, 350, 0, 0, 0, 0, 1, 0);
 }
 

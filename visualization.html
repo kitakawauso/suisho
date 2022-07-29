@@ -52,28 +52,35 @@
         <div>
           <button
             class="btn btn--cubic btn--green btn--radius"
-            onclick="viewReset()"
+            onclick="bornReset()"
           >
-            view reset
+            born view reset
           </button>
         </div>
       </div>
 
-      <div class="player1-box">
+      <div class="player0-box">
         <h2>JSON File input</h2>
         <input
           type="file"
           accept=".json"
-          class="player1"
+          class="player0"
           onchange="readFile(this)"
         />
 
         <h2>Clustering</h2>
-        <div class="player1" id="clusteringBox"></div>
+        <div class="player0" id="clusteringBox0"></div>
+        <label id="allCheckBox0" hidden
+          ><input
+            type="checkbox"
+            checked
+            onchange="allCheck(this, 0)"
+          />全てチェックする</label
+        >
 
-        <div id="graphPartsBox1" hidden>
+        <div id="graphPartsBox0" hidden>
           <label>グラフで表示する部位：</label>
-          <select class="player1" id="partSelect" onchange="partsChange(this)">
+          <select class="player0" id="partSelect" onchange="partsChange(this)">
             <option id="nose" value="0">鼻</option>
             <option id="leftEyeInner" value="1">左目の内側</option>
             <option id="leftEye" value="2">左目</option>
@@ -111,21 +118,28 @@
         </div>
       </div>
 
-      <div class="player2-box">
+      <div class="player1-box">
         <h2>JSON File input</h2>
         <input
           type="file"
           accept=".json"
-          class="player2"
+          class="player1"
           onchange="readFile(this)"
         />
 
         <h2>Clustering</h2>
-        <div class="player2" id="clusteringBox"></div>
+        <div class="player1" id="clusteringBox1"></div>
+        <label id="allCheckBox1" hidden
+          ><input
+            type="checkbox"
+            checked
+            onchange="allCheck(this, 1)"
+          />全てチェックする</label
+        >
 
-        <div id="graphPartsBox2" hidden>
+        <div id="graphPartsBox1" hidden>
           <label>グラフで表示する部位：</label>
-          <select class="player2" id="partSelect" onchange="partsChange(this)">
+          <select class="player1" id="partSelect" onchange="partsChange(this)">
             <option id="nose" value="0">鼻</option>
             <option id="leftEyeInner" value="1">左目の内側</option>
             <option id="leftEye" value="2">左目</option>
