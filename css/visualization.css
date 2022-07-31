@@ -35,6 +35,11 @@
 .graph-box {
   margin: 5%;
   grid-area: graph;
+  text-align: center;
+}
+
+.coordinate-box {
+  margin-bottom: 5%;
 }
 
 #clusteringBox0 > label {

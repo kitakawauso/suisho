@@ -6,10 +6,12 @@ const allCheckBox0 = document.getElementById("allCheckBox0");
 const allCheckBox1 = document.getElementById("allCheckBox1");
 
 let playerNum = 0;
+let playerColors = [];
+
 let input = [[], []];
 let clustering = [[], []];
-let playerColors = [];
 let part = [14, 14];
+let coordinate = "x";
 
 function readFile(file) {
   var fileList = file.files;
@@ -35,7 +37,7 @@ function readFile(file) {
     playerColors = createColorList(length0, length1);
     console.log(playerColors);
 
-    pushChartData(input, clustering, part);
+    pushChartData(input, clustering, part, coordinate);
   };
 }
 
@@ -86,8 +88,8 @@ function clusterChange() {
     clustering[n][v] = 0;
   }
   // console.log(clustering);
-  pushChartData(input, clustering, part);
   checkChecked(n);
+  pushChartData(input, clustering, part, coordinate);
 }
 
 let slider = document.getElementById("slider");
@@ -105,7 +107,6 @@ function checkChecked(n) {
   for (var i = 0; i < clustering[n].length; i++) {
     if (!clustering[n][i]) tf = false;
   }
-  console.log(tf);
 
   var check;
   if (!n) check = allCheckBox0.children[0];
@@ -114,8 +115,8 @@ function checkChecked(n) {
   check.checked = tf;
 }
 
-function allCheck(input, n) {
-  var tf = input.checked;
+function allCheck(allCheckBox, n) {
+  var tf = allCheckBox.checked;
   var v;
   if (tf) v = 1;
   else if (!tf) v = 0;
@@ -125,6 +126,8 @@ function allCheck(input, n) {
     if (!n) clusteringBox0.children[i].children[0].checked = tf;
     else if (n) clusteringBox1.children[i].children[0].checked = tf;
   }
+  console.log(clustering);
+  pushChartData(input, clustering, part, coordinate);
 }
 
 function partsChange(select) {
@@ -133,5 +136,10 @@ function partsChange(select) {
   else if (tmp == "player1") p = 1;
 
   part[p] = select.value;
-  pushChartData(input, clustering, part);
+  pushChartData(input, clustering, part, coordinate);
+}
+
+function coordinateChecked(value) {
+  coordinate = value;
+  pushChartData(input, clustering, part, coordinate);
 }

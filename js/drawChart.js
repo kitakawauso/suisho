@@ -7,17 +7,14 @@ for (var i = 0; i < 40; i++) {
   xLabel.push(i);
 }
 
-function pushChartData(inputData, clusteringList, partList) {
+function pushChartData(inputData, clusteringList, partList, coordinate) {
   var dataset = [];
 
   for (var i = 0; i < 2; i++) {
     var part = partList[i];
     for (var j = 0; j < clusteringList[i].length; j++) {
-      var playerI = i + 1;
-      var playerJ = j + 1;
-      var label = "" + playerI + "-" + playerJ;
       var chartData = {
-        label: label,
+        label: [],
         data: [],
         backgroundColor: [],
         borderColor: [],
@@ -26,6 +23,11 @@ function pushChartData(inputData, clusteringList, partList) {
       };
 
       if (clusteringList[i][j]) {
+        var playerI = i + 1;
+        var playerJ = j + 1;
+        var label = "" + playerI + "-" + playerJ;
+        chartData.label = label;
+
         let tmp = inputData[i].swipe.keypoints.pose[j];
 
         if (!tmp) console.log("null");
@@ -35,25 +37,29 @@ function pushChartData(inputData, clusteringList, partList) {
           for (var l = 0; l < tmp.length; l++) {
             var d = 0;
             if (!tmp[l]) d = null;
-            else d = tmp[l][part].x;
+            else {
+              if (coordinate == "x") d = tmp[l][part].x;
+              else if (coordinate == "y") d = 1 - tmp[l][part].y;
+              else if (coordinate == "z") d = tmp[l][part].z;
+            }
             buf.push(d);
           }
           chartData.data = buf;
         }
+
+        let color =
+          "rgba(" +
+          playerColors[i][j][0] +
+          "," +
+          playerColors[i][j][1] +
+          "," +
+          playerColors[i][j][2] +
+          ",1)";
+        chartData.backgroundColor = color;
+        chartData.borderColor = color;
+
+        dataset.push(chartData);
       }
-
-      let color =
-        "rgba(" +
-        playerColors[i][j][0] +
-        "," +
-        playerColors[i][j][1] +
-        "," +
-        playerColors[i][j][2] +
-        ",1)";
-      chartData.backgroundColor = color;
-      chartData.borderColor = color;
-
-      dataset.push(chartData);
     }
   }
 
@@ -87,7 +93,7 @@ function drawChart(dataset) {
           legend: {
             position: "bottom",
             labels: {
-              boxWidth: 50,
+              boxWidth: 5,
             },
           },
 

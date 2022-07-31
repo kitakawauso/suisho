@@ -180,6 +180,28 @@
       <div class="canvas-box" id="bornCanvas"></div>
 
       <div class="graph-box">
+        <div class="coordinate-box">
+          <label>グラフで表示する座標：</label
+          ><input
+            type="radio"
+            name="coordinateForm"
+            value="x"
+            onchange="coordinateChecked(this.value)"
+            checked
+          /><label>x座標</label>
+          <input
+            type="radio"
+            name="coordinateForm"
+            value="y"
+            onchange="coordinateChecked(this.value)"
+          /><label>y座標</label>
+          <input
+            type="radio"
+            name="coordinateForm"
+            value="z"
+            onchange="coordinateChecked(this.value)"
+          /><label>z座標</label><br />
+        </div>
         <canvas id="chartCanvas"></canvas>
       </div>
     </div>
