@@ -103,28 +103,27 @@ function slideFrame() {
 }
 
 function checkChecked(n) {
+  var check;
+  if (!n) check = allCheckBox0.children[0];
+  else if (n) check = allCheckBox1.children[0];
+
   var tf = true;
   for (var i = 0; i < clustering[n].length; i++) {
     if (!clustering[n][i]) tf = false;
   }
 
-  var check;
-  if (!n) check = allCheckBox0.children[0];
-  else if (n) check = allCheckBox1.children[0];
-
   check.checked = tf;
 }
 
 function allCheck(allCheckBox, n) {
-  var tf = allCheckBox.checked;
   var v;
-  if (tf) v = 1;
-  else if (!tf) v = 0;
+  if (allCheckBox.checked) v = 1;
+  else if (!allCheckBox.checked) v = 0;
 
   for (var i = 0; i < clustering[n].length; i++) {
     clustering[n][i] = v;
-    if (!n) clusteringBox0.children[i].children[0].checked = tf;
-    else if (n) clusteringBox1.children[i].children[0].checked = tf;
+    if (!n) clusteringBox0.children[i].children[0].checked = check(v);
+    else if (n) clusteringBox1.children[i].children[0].checked = check(v);
   }
   console.log(clustering);
   pushChartData(input, clustering, part, coordinate);

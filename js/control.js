@@ -1,7 +1,8 @@
 // console log begin
-const consoleLog = document.getElementById("consoleLog");
-const stateLog = document.getElementById("stateLog");
 function writeToConsole(msg, type) {
+  const consoleLog = document.getElementById("consoleLog");
+  const stateLog = document.getElementById("stateLog");
+
   if (type == "msg") {
     consoleLog.innerHTML += msg + "<br>";
   } else if (type == "state") {
@@ -13,11 +14,11 @@ function writeToConsole(msg, type) {
 // card position set begin
 let recordState = "waiting";
 
-let column = 15;
-let tr;
-let row = 6;
-
 function cardOnClick(td) {
+  let column = 15;
+  let tr;
+  let row = 6;
+
   if (recordState == "recording") {
     writeToConsole("Can't change card during recording1sec.", "msg");
   } else {
@@ -36,10 +37,11 @@ function cardOnClick(td) {
 // card position set end
 
 // counter begin
-const counterText = document.getElementById("counterText");
 let maxRepeat = 1;
 
 function downRepeat() {
+  const counterText = document.getElementById("counterText");
+
   if (counterText.value > 1) {
     counterText.value--;
   }

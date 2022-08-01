@@ -1,13 +1,3 @@
-let nameInput = document.getElementById("nameForm");
-let ageInput = document.getElementById("ageForm");
-let gradeInput = document.getElementById("gradeForm");
-let tallInput = document.getElementById("tallForm");
-let careerInput = document.getElementById("careerForm");
-let genderInput = document.getElementsByName("genderForm");
-let handInput = document.getElementsByName("handForm");
-let styleInput = document.getElementById("styleForm");
-let bodyInput = document.getElementById("bodyForm");
-
 function radioChecked(formInput) {
   let ans;
   for (let i = 0; i < formInput.length; i++) {
@@ -19,6 +9,16 @@ function radioChecked(formInput) {
 }
 
 function settingOnClick() {
+  let nameInput = document.getElementById("nameForm");
+  let ageInput = document.getElementById("ageForm");
+  let gradeInput = document.getElementById("gradeForm");
+  let tallInput = document.getElementById("tallForm");
+  let careerInput = document.getElementById("careerForm");
+  let genderInput = document.getElementsByName("genderForm");
+  let handInput = document.getElementsByName("handForm");
+  let styleInput = document.getElementById("styleForm");
+  let bodyInput = document.getElementById("bodyForm");
+
   outputData.player.name = nameInput.value;
   outputData.player.age = ageInput.value;
   outputData.player.grade = gradeInput.value;

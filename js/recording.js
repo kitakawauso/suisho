@@ -1,11 +1,14 @@
 // base setting begin
 const inputVideo = document.getElementsByClassName("input-video")[0];
+inputVideo.style.display = "none";
+
 const outputCanvas = document.getElementsByClassName("output-canvas")[0];
 const canvasCtx = outputCanvas.getContext("2d");
-const chant = document.getElementsByClassName("chant")[0];
-const saveBtn = document.getElementById("saveBtn");
 
-inputVideo.style.display = "none";
+let poseSwipe = [];
+let leftHandSwipe = [];
+let rightHandSwipe = [];
+
 // base setting end
 
 function onResults(results) {
@@ -73,8 +76,22 @@ holistic.setOptions({
 holistic.onResults(onResults);
 
 function recording(count) {
-  console.log(count);
-  console.log(recordState);
+  // if recorded -> swipeData.push(swipe)
+  // if count >= maxRepeat -> outputData.push(swipeData) -> waiting
+  const swipeData = {
+    position: [6, 15], // default 自陣右下段
+    keypoints: {
+      pose: [],
+      hand: {
+        left: [],
+        right: [],
+      },
+    },
+  };
+
+  // console.log(count);
+  // console.log(recordState);
+
   if (recordState == "recorded") {
     swipeData.position = [row, column];
 
@@ -121,9 +138,13 @@ function convertTimeToMS(currentTime) {
   return res;
 }
 
-const startTime = "0:07"; // recoding time
-
 function chanting() {
+  // if currentTime = startTime -> recording(count) -> after 2s recorded
+  const startTime = "0:07"; // recoding time
+
+  const chant = document.getElementsByClassName("chant")[0];
+  const saveBtn = document.getElementById("saveBtn");
+
   writeToConsole("Please prepare to swipe.", "msg");
   writeToConsole("Recording now", "state");
   chant.loop = true;
@@ -133,9 +154,9 @@ function chanting() {
   chant.addEventListener(
     "timeupdate",
     function () {
-      let time = convertTimeToMS(chant.currentTime);
+      let currentTime = convertTimeToMS(chant.currentTime);
 
-      if (time == startTime && recordState == "waiting") {
+      if (currentTime == startTime && recordState == "waiting") {
         recordState = "recording";
         count++;
         setTimeout(function () {

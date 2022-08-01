@@ -1,6 +1,4 @@
-var ctx = document.getElementById("chartCanvas").getContext("2d");
-
-var xLabel = [];
+let xLabel = [];
 for (var i = 0; i < 40; i++) {
   // max is slider's max
   // TODO: max = 60;
@@ -69,6 +67,8 @@ function pushChartData(inputData, clusteringList, partList, coordinate) {
 var chart = null;
 
 function drawChart(dataset) {
+  const ctx = document.getElementById("chartCanvas").getContext("2d");
+
   if (!chart) {
     chart = new Chart(ctx, {
       type: "line",

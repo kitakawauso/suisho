@@ -13,41 +13,13 @@ const outputData = {
   swipe: [],
 };
 
-const swipeData = {
-  position: [6, 15], // default 自陣右下段
-  keypoints: {
-    pose: [],
-    hand: {
-      left: [],
-      right: [],
-    },
-  },
-};
-
-let poseSwipe = [];
-let leftHandSwipe = [];
-let rightHandSwipe = [];
-
 // data structure
 // outputData -> swipe(swipeData) -> keypoints -> pose          -> poseSwipe
 //                                             -> hand -> left  -> leftHandSwipe
 //                                             -> hand -> right -> rightHandSwipe
 
-let generalColorList = [
-  [51, 34, 136],
-  [136, 204, 238],
-  [68, 170, 153],
-  [17, 119, 51],
-  [153, 153, 51],
-  [221, 204, 119],
-  [204, 102, 119],
-  [136, 34, 58],
-  [170, 68, 153],
-  [100, 100, 100],
-];
-
 function createColorList(max1, max2) {
-  var list = [[], []];
+  var colorList = [[], []];
 
   for (var p = 0; p < 2; p++) {
     var first = [];
@@ -73,9 +45,9 @@ function createColorList(max1, max2) {
       for (var j = 0; j < 3; j++) {
         tmp[j] = first[j] + step[j] * i; // ここうまくいってない、同じ数値になる
       }
-      list[p].push(tmp);
+      colorList[p].push(tmp);
     }
   }
 
-  return list;
+  return colorList;
 }

@@ -123,6 +123,7 @@ function drawSphere(data, color, type) {
 }
 
 function draw() {
+  // sequential execution
   background(300);
   drawPlane();
   orbitControl();
