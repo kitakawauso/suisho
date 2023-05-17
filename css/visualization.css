@@ -6,7 +6,7 @@
   /* TODO: Responsive support */
   grid-template-areas:
     "control player0 player1"
-    "born    graph   graph";
+    "bone    graph   graph";
 }
 
 .control-box {
@@ -27,7 +27,7 @@
 .canvas-box {
   margin: 5%;
   border: 1px solid #333;
-  grid-area: born;
+  grid-area: bone;
   /* resize: both; */
   overflow: hidden;
 }

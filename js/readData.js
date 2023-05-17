@@ -122,8 +122,9 @@ function allCheck(allCheckBox, n) {
 
   for (var i = 0; i < clustering[n].length; i++) {
     clustering[n][i] = v;
-    if (!n) clusteringBox0.children[i].children[0].checked = check(v);
-    else if (n) clusteringBox1.children[i].children[0].checked = check(v);
+    if (!n) clusteringBox0.children[i].children[0].checked = checkChecked(v);
+    else if (n)
+      clusteringBox1.children[i].children[0].checked = checkChecked(v);
   }
   console.log(clustering);
   pushChartData(input, clustering, part, coordinate);

@@ -93,7 +93,7 @@ function recording(count) {
   // console.log(recordState);
 
   if (recordState == "recorded") {
-    swipeData.position = [row, column];
+    // swipeData.position = [row, column];
 
     swipeData.keypoints.pose.push(poseSwipe);
     swipeData.keypoints.hand.left.push(leftHandSwipe);
@@ -166,7 +166,7 @@ function chanting() {
             chant.loop = false;
             saveBtn.disabled = false;
           }
-        }, 2000);
+        }, 5000);
         // TODO: change to 3000;
       }
 

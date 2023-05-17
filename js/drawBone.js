@@ -35,8 +35,8 @@ const node = [
 ];
 
 function setup() {
-  let bornCanvas = createCanvas(windowWidth / 3, windowHeight / 2, WEBGL);
-  bornCanvas.parent("bornCanvas");
+  let boneCanvas = createCanvas(windowWidth / 3, windowHeight / 2, WEBGL);
+  boneCanvas.parent("boneCanvas");
   angleMode(DEGREES);
   normalMaterial();
   // debugMode(); // display grid
@@ -48,7 +48,7 @@ function windowResized() {
   resizeCanvas(windowWidth / 3, windowHeight / 2);
 }
 
-function bornReset() {
+function boneReset() {
   camera(300, 0, 350, 0, 0, 0, 0, 1, 0);
 }
 
