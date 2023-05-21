@@ -37,7 +37,8 @@ function readFile(file) {
     playerColors = createColorList(length0, length1);
     console.log(playerColors);
 
-    pushChartData(input, clustering, part, coordinate);
+    pushLineChartData(input, clustering, part, coordinate);
+    pushBoxChartData(input);
   };
 }
 
@@ -89,7 +90,7 @@ function clusterChange() {
   }
   // console.log(clustering);
   checkChecked(n);
-  pushChartData(input, clustering, part, coordinate);
+  pushLineChartData(input, clustering, part, coordinate);
 }
 
 let slider = document.getElementById("slider");
@@ -127,7 +128,7 @@ function allCheck(allCheckBox, n) {
       clusteringBox1.children[i].children[0].checked = checkChecked(v);
   }
   console.log(clustering);
-  pushChartData(input, clustering, part, coordinate);
+  pushLineChartData(input, clustering, part, coordinate);
 }
 
 function partsChange(select) {
@@ -136,10 +137,10 @@ function partsChange(select) {
   else if (tmp == "player1") p = 1;
 
   part[p] = select.value;
-  pushChartData(input, clustering, part, coordinate);
+  pushLineChartData(input, clustering, part, coordinate);
 }
 
 function coordinateChecked(value) {
   coordinate = value;
-  pushChartData(input, clustering, part, coordinate);
+  pushLineChartData(input, clustering, part, coordinate);
 }
